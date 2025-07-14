@@ -1,0 +1,15 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Godot-generated folders
+.import/
+.export/
+
+# Export settings (optional)
+export.cfg
+export_presets.cfg
+
+# OS junk files
+.DS_Store
+Thumbs.db
