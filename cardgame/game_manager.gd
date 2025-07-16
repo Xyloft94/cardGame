@@ -7,6 +7,6 @@ func selectedCard(card: Node):
 	
 func selectedTarget(target: Node):
 	if chosenCard:
-		chosenCard.play(target)
+		chosenCard.play(target.parent)
 		print(chosenCard.Name)
 	

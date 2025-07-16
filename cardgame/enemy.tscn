@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0d7t8gi0wlq0"]
+[gd_scene load_steps=5 format=3 uid="uid://b0d7t8gi0wlq0"]
 
 [ext_resource type="Texture2D" uid="uid://bwcpbfmptww7e" path="res://icon.svg" id="1_wgbni"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_yrbui"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://click_box.tscn" id="2_yh3eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glsvb"]
 size = Vector2(126, 125)
 
-[node name="enemy" type="Node2D"]
+[node name="enemy" type="Node2D" groups=["Enemy"]]
+script = ExtResource("1_yrbui")
+health = 10
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-12, 5)
