@@ -18,7 +18,6 @@ func damage(amount:int, target:Node):
 		target.takeDamage(amount)
 		
 func armor(amount:int):
-	print("well this works")
 	if caster.has_method("gainArmor"):
 		caster.gainArmor(amount)
 
