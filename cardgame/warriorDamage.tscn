@@ -10,6 +10,7 @@ size = Vector2(77, 118)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4bxlj")
 Name = "Warrior"
+APcost = 1
 
 [node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_n0fqf")]
 player = true
