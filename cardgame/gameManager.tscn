@@ -2,5 +2,10 @@
 
 [ext_resource type="Script" path="res://game_manager.gd" id="1_1yqe7"]
 
-[node name="gameManager" type="Node2D"]
+[node name="gameManager" type="Node2D" node_paths=PackedStringArray("discriptionLabel")]
 script = ExtResource("1_1yqe7")
+discriptionLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

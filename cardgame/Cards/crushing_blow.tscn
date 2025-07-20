@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8na1utjf2iwk"]
+
+[ext_resource type="Script" path="res://Crushing_Blow.gd" id="1_bd6i0"]
+[ext_resource type="Texture2D" uid="uid://bwhgwcvnp7apn" path="res://Art/crushingBlow-export.png" id="2_0vvey"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://click_box.tscn" id="3_n2nli"]
+
+[node name="Crushing_Blow" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_bd6i0")
+APcost = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0vvey")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_n2nli")]
+player = true
+parent = NodePath("..")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw4lah0trj356"
-path="res://.godot/imported/warriorBasic.png-99b17394010c29e61934a01d41af014a.ctex"
+uid="uid://cfeto25uf16og"
+path="res://.godot/imported/Rage_Warrior-export.png-0c153a8346909ecc4bfd4a020490067c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/warriorBasic.png"
-dest_files=["res://.godot/imported/warriorBasic.png-99b17394010c29e61934a01d41af014a.ctex"]
+source_file="res://Art/Rage_Warrior-export.png"
+dest_files=["res://.godot/imported/Rage_Warrior-export.png-0c153a8346909ecc4bfd4a020490067c.ctex"]
 
 [params]
 

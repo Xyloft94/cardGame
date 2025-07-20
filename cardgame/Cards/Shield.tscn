@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfhfrca4pmlpb"]
+
+[ext_resource type="Script" path="res://Shield.gd" id="1_fo4an"]
+[ext_resource type="Texture2D" uid="uid://dfr3jag0mq1rw" path="res://Art/Shield_Warrior-export.png" id="2_lirnx"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://click_box.tscn" id="3_vgqld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbeeb"]
+size = Vector2(39, 60)
+
+[node name="Shield" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_fo4an")
+APcost = 1
+Discription = "Gain 4 armor"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lirnx")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_vgqld")]
+player = true
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="clickBox" index="0"]
+position = Vector2(3.5, 1)
+shape = SubResource("RectangleShape2D_sbeeb")
+
+[editable path="clickBox"]

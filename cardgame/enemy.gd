@@ -11,6 +11,7 @@ func _input(event):
 
 func takeDamage(damage: int):
 	health -= damage
+	print("Enemy health is ", health, "The enemy was dealth ", damage, "damage")
 
 func dealDamage(amount: int):
 	if modifiedDamage <= 0:

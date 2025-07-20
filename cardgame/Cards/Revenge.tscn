@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cteqea5gs3csn"]
+
+[ext_resource type="Script" path="res://Revenge.gd" id="1_xsccn"]
+[ext_resource type="Texture2D" uid="uid://bo7iw0kr8h33" path="res://Art/Revenge-export.png" id="2_ay61e"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://click_box.tscn" id="3_jt5m8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b67pd"]
+size = Vector2(37, 58)
+
+[node name="Revenge" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_xsccn")
+APcost = 1
+Discription = "Deals 3 damage. If hurt last turn, deal 8 damage"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ay61e")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_jt5m8")]
+player = true
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="clickBox" index="0"]
+position = Vector2(2.5, 2)
+shape = SubResource("RectangleShape2D_b67pd")
+
+[editable path="clickBox"]
