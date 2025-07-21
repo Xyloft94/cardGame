@@ -9,6 +9,9 @@ func _input(event):
 	if event.is_action_pressed("Space"):
 		Attack()
 
+func _physics_process(delta):
+	print(health)
+
 func takeDamage(damage: int):
 	health -= damage
 	print("Enemy health is ", health, "The enemy was dealth ", damage, "damage")

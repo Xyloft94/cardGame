@@ -1,27 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwyexamifo8qe"]
+[gd_scene load_steps=7 format=3 uid="uid://cwyexamifo8qe"]
 
 [ext_resource type="Script" path="res://Rage.gd" id="1_bb5n2"]
 [ext_resource type="Texture2D" uid="uid://cfeto25uf16og" path="res://Art/Rage_Warrior-export.png" id="2_0jil2"]
-[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://click_box.tscn" id="3_hqdse"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_hqdse"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/cardBox.tscn" id="4_o8w6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sd45w"]
 size = Vector2(41, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo725"]
+size = Vector2(40.6667, 58)
 
 [node name="Rage" type="Node2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_bb5n2")
 APcost = 1
-Discription = "Next attack gets +4 damage"
+Description = "Next Attack deals 4 more Damage"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0jil2")
 
 [node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_hqdse")]
-player = true
+card = true
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="clickBox" index="0"]
 position = Vector2(2.5, 2)
 shape = SubResource("RectangleShape2D_sd45w")
 
+[node name="cardBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_o8w6o")]
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="cardBox" index="0"]
+position = Vector2(2.33333, 1.66667)
+shape = SubResource("RectangleShape2D_mo725")
+
 [editable path="clickBox"]
+[editable path="cardBox"]

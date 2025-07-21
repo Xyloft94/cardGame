@@ -1,4 +1,4 @@
-extends "res://Card.gd"
+extends "res://Scripts/Card.gd"
 
 func _physics_process(delta):
 	if caster.armor >= 10:
@@ -6,3 +6,4 @@ func _physics_process(delta):
 
 func play(target):
 	damage(14, target)
+	discard()

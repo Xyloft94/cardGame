@@ -1,5 +1,6 @@
-extends "res://Card.gd"
+extends "res://Scripts/Card.gd"
 
 
 func play(target):
-	armor(4)
+	armor(4, target)
+	discard()

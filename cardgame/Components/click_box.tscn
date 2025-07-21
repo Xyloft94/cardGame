@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ckf2srdid3krn"]
 
-[ext_resource type="Script" path="res://click_box.gd" id="1_ii0p6"]
+[ext_resource type="Script" path="res://Scripts/click_box.gd" id="1_ii0p6"]
 
 [node name="clickBox" type="Area2D"]
 script = ExtResource("1_ii0p6")

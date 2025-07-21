@@ -1,27 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg0xa36nq8dwx"]
+[gd_scene load_steps=7 format=3 uid="uid://bg0xa36nq8dwx"]
 
 [ext_resource type="Script" path="res://Node2D.gd" id="1_4acur"]
 [ext_resource type="Texture2D" uid="uid://c2mxjouh45u4t" path="res://Art/Brace_Warrior-export.png" id="2_8twwu"]
-[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://click_box.tscn" id="3_c5g1g"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_c5g1g"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/cardBox.tscn" id="4_tqv5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qiqd0"]
 size = Vector2(41, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bpqj"]
+size = Vector2(39.3333, 59.3333)
 
 [node name="Brace" type="Node2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_4acur")
 APcost = 1
-Discription = "Gain 4 armor, and 1 AP next turn"
+Description = "Gain 4 Armor,  Gain 1 AP next turn"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_8twwu")
 
 [node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_c5g1g")]
-player = true
+card = true
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="clickBox" index="0"]
 position = Vector2(3.5, 1)
 shape = SubResource("RectangleShape2D_qiqd0")
 
+[node name="cardBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_tqv5d")]
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="cardBox" index="0"]
+position = Vector2(3, 1.66667)
+shape = SubResource("RectangleShape2D_8bpqj")
+
 [editable path="clickBox"]
+[editable path="cardBox"]

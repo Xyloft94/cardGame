@@ -8,6 +8,7 @@ var warriorHurt: bool
 var wizardHurt: bool
 var currentTurn = TurnOrder.PLAYER
 #var Player = get_tree().get_first_node_in_group("Player")
+var battleUI :CanvasLayer = null
 enum TurnOrder {PLAYER, ENEMY}
 
 
@@ -16,13 +17,14 @@ func _ready():
 
 func selectedCard(card: Node):
 	chosenCard = card
-	print(card.Discription)
 	
 func selectedTarget(target: Node):
 	if chosenCard and chosenCard.APcost <= totalAP:
 		chosenCard.play(target.parent)
 		totalAP = (totalAP - chosenCard.APcost)
+		battleUI.apLabel.text = str(totalAP)
 		print(totalAP)
+		
 		
 func enemyTurn():
 	pass
@@ -39,6 +41,8 @@ func endPlayerTurn():
 func endEnemyTurn():
 	resetAP()
 	currentTurn = TurnOrder.PLAYER
+	totalAP = (totalAP + modAP)
+	battleUI.apLabel = totalAP
 	
 	
 func takenDamage(Name:String):
@@ -57,6 +61,11 @@ func resetAP():
 		totalAP 
 		totalAP = (modAP + 3)
 	totalAP = 3
-
-
 	
+func showDescription(Description:String, cost:int):
+	battleUI.Card.visible = true
+	battleUI.Description.text = Description
+	battleUI.costAP.text = (str(cost))
+	
+func hideDescription():
+	battleUI.Card.visible = false

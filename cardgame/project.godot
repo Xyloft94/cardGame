@@ -20,6 +20,12 @@ config/icon="res://icon.svg"
 gameManager="*res://gameManager.tscn"
 EventBus="*res://EventBus.gd"
 
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=540
+window/stretch/mode="viewport"
+
 [input]
 
 Space={

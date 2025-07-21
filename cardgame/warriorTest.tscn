@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdw86nxxni67b"]
+[gd_scene load_steps=6 format=3 uid="uid://cdw86nxxni67b"]
 
 [ext_resource type="Script" path="res://warriorTest.gd" id="1_qx86s"]
 [ext_resource type="Texture2D" uid="uid://f2bdeb6jim0c" path="res://Art/warriorSprite.png" id="1_tijxr"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_r72qb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwffa"]
 radius = 29.0
 height = 124.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5vb2"]
+size = Vector2(75, 112)
 
 [node name="warriorTest" type="CharacterBody2D" groups=["Player", "Warrior"]]
 script = ExtResource("1_qx86s")
@@ -17,3 +21,12 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 3)
 shape = SubResource("CapsuleShape2D_fwffa")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_r72qb")]
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="clickBox" index="0"]
+position = Vector2(-4.5, 4)
+shape = SubResource("RectangleShape2D_i5vb2")
+
+[editable path="clickBox"]

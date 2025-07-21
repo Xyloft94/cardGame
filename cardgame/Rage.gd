@@ -1,4 +1,5 @@
-extends "res://Card.gd"
+extends "res://Scripts/Card.gd"
 
 func play(target):
-	temp_buffDamage(4)
+	temp_buffDamage(4, target)
+	discard()
