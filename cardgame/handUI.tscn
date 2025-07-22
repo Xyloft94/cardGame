@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1p1nehy4edb8"]
 
-[ext_resource type="Script" path="res://handUI.gd" id="1_onj5w"]
+[ext_resource type="Script" path="res://Scripts/handUI.gd" id="1_onj5w"]
 
 [node name="handUI" type="Node2D"]
 script = ExtResource("1_onj5w")

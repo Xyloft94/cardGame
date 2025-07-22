@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8na1utjf2iwk"]
+[gd_scene load_steps=8 format=3 uid="uid://c8na1utjf2iwk"]
 
 [ext_resource type="Script" path="res://Scripts/Crushing_Blow.gd" id="1_bd6i0"]
 [ext_resource type="Texture2D" uid="uid://bwhgwcvnp7apn" path="res://Art/crushingBlow-export.png" id="2_0vvey"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Highlight.tscn" id="2_400av"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_n2nli"]
-[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/cardBox.tscn" id="4_cdxdi"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_cdxdi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgyxo"]
 size = Vector2(40, 59.3333)
@@ -11,11 +12,14 @@ size = Vector2(40, 59.3333)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuojp"]
 size = Vector2(38.6667, 60.6667)
 
-[node name="Crushing_Blow" type="Node2D"]
+[node name="Crushing_Blow" type="Node2D" node_paths=PackedStringArray("Highlight")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_bd6i0")
 APcost = 3
 Description = "Deals 14 Damage, if Player has 10 or more Armor, this Attack costs 1"
+Highlight = NodePath("Highlight")
+
+[node name="Highlight" parent="." instance=ExtResource("2_400av")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0vvey")
@@ -30,6 +34,7 @@ shape = SubResource("RectangleShape2D_sgyxo")
 
 [node name="cardBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_cdxdi")]
 parent = NodePath("..")
+card = true
 
 [node name="CollisionShape2D" parent="cardBox" index="0"]
 position = Vector2(2, 1.66667)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cteqea5gs3csn"]
+[gd_scene load_steps=8 format=3 uid="uid://cteqea5gs3csn"]
 
-[ext_resource type="Script" path="res://Revenge.gd" id="1_xsccn"]
+[ext_resource type="Script" path="res://Scripts/Revenge.gd" id="1_xsccn"]
 [ext_resource type="Texture2D" uid="uid://bo7iw0kr8h33" path="res://Art/Revenge-export.png" id="2_ay61e"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Highlight.tscn" id="2_nplgx"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_jt5m8"]
-[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/cardBox.tscn" id="4_cd7ty"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_cd7ty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b67pd"]
 size = Vector2(37, 58)
@@ -11,11 +12,14 @@ size = Vector2(37, 58)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0uflk"]
 size = Vector2(36.6667, 58)
 
-[node name="Revenge" type="Node2D"]
+[node name="Revenge" type="Node2D" node_paths=PackedStringArray("Highlight")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_xsccn")
 APcost = 1
 Description = "Deal 3 Damage, if Hurt last turn, deal 8"
+Highlight = NodePath("Highlight")
+
+[node name="Highlight" parent="." instance=ExtResource("2_nplgx")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ay61e")
@@ -30,6 +34,7 @@ shape = SubResource("RectangleShape2D_b67pd")
 
 [node name="cardBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_cd7ty")]
 parent = NodePath("..")
+card = true
 
 [node name="CollisionShape2D" parent="cardBox" index="0"]
 position = Vector2(2.33333, 2.33333)

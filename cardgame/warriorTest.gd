@@ -21,12 +21,12 @@ var intelligence: int = 5
 func _ready():
 	setupDeck()
 	drawHand()
-	print("Cards in draw pile:")
-	for card in drawPile:
-		print(card.resource_path)
+	gameManager.Player = self
+	gameManager.setAP()
 
 func takeDamage(damage :int):
 	health = (damage - armor) - health
+	print()
 	EventBus.emit_signal("takenDamage", Name)
 		
 func temp_modifyDamage(baseDamage):
@@ -63,3 +63,8 @@ func drawCard():
 	card.caster = self
 	handContainer.add_child(card)
 	handContainer.arrangeHand()
+	
+func reDraw():
+	var numberToDraw = intelligence - handContainer.get_child_count()
+	for i in numberToDraw:
+		drawCard()

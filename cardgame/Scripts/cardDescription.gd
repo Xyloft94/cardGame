@@ -4,6 +4,16 @@ extends CanvasLayer
 @export var Description: Label
 @export var costAP: Label
 @export var apLabel: Label
+@export var EnemyDescription: Panel
+@export var enemyName: Label
+@export var enemyHealth: Label
+@export var enemyBuffs: Label
 
 func _ready():
-	apLabel.text = str(gameManager.totalAP)
+	apLabel.text = ("AP: " + str(gameManager.totalAP))
+	
+
+
+
+func _on_button_pressed():
+	gameManager.endPlayerTurn()

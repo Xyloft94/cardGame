@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://6a6hqqmue5mn"]
 
-[ext_resource type="Script" path="res://testLevel.gd" id="1_komnh"]
+[ext_resource type="Script" path="res://Scripts/testLevel.gd" id="1_komnh"]
 [ext_resource type="PackedScene" uid="uid://b0d7t8gi0wlq0" path="res://enemy.tscn" id="2_pm7cg"]
 [ext_resource type="PackedScene" uid="uid://1p1nehy4edb8" path="res://handUI.tscn" id="3_2cuvp"]
 [ext_resource type="PackedScene" uid="uid://cdw86nxxni67b" path="res://warriorTest.tscn" id="3_uivg0"]
@@ -17,6 +17,6 @@ position = Vector2(180, 201)
 handContainer = NodePath("../handUI")
 
 [node name="handUI" parent="." instance=ExtResource("3_2cuvp")]
-position = Vector2(330, 478)
+position = Vector2(221, 477)
 
 [node name="battleUI" parent="." instance=ExtResource("5_hilpl")]

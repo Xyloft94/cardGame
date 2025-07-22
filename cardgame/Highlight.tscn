@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b78cretiwm85u"]
+
+[node name="Highlight" type="ColorRect"]
+visible = false
+offset_left = -21.0
+offset_top = -37.0
+offset_right = 26.0
+offset_bottom = 37.0
+color = Color(0, 0.65098, 0.654902, 1)

@@ -1,26 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0d7t8gi0wlq0"]
+[gd_scene load_steps=7 format=3 uid="uid://b0d7t8gi0wlq0"]
 
 [ext_resource type="Texture2D" uid="uid://bwcpbfmptww7e" path="res://icon.svg" id="1_wgbni"]
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_yrbui"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="2_yh3eq"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_cg1xn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glsvb"]
 size = Vector2(126, 125)
 
-[node name="enemy" type="Node2D" groups=["Enemy"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq6m5"]
+size = Vector2(124, 127)
+
+[node name="enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_yrbui")
-health = 10
+health = 30
+Name = "Enemy"
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-12, 5)
 texture = ExtResource("1_wgbni")
 
 [node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_yh3eq")]
-enemy = true
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="clickBox" index="0"]
 position = Vector2(-11, 7.5)
 shape = SubResource("RectangleShape2D_glsvb")
 
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_cg1xn")]
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="hoverBox" index="0"]
+position = Vector2(-12, 6.5)
+shape = SubResource("RectangleShape2D_uq6m5")
+
 [editable path="clickBox"]
+[editable path="hoverBox"]

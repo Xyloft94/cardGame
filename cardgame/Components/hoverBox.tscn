@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/cardBox.gd" id="1_vwkmq"]
 
-[node name="cardBox" type="Area2D"]
+[node name="hoverBox" type="Area2D"]
 script = ExtResource("1_vwkmq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
