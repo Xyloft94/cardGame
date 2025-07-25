@@ -8,6 +8,11 @@ extends CanvasLayer
 @export var enemyName: Label
 @export var enemyHealth: Label
 @export var enemyBuffs: Label
+@export var PlayerDescription: Panel
+@export var playerName: Label
+@export var playerHealth: Label
+@export var playerBuffs: Label
+@export var playerArmor: Label
 
 func _ready():
 	apLabel.text = ("AP: " + str(gameManager.totalAP))

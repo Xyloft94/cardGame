@@ -25,8 +25,16 @@ func _ready():
 	gameManager.setAP()
 
 func takeDamage(damage :int):
-	health = (damage - armor) - health
-	print()
+	if armor >= 0:
+		var newDamage = (damage - armor)
+		if newDamage >= armor:
+			armor = 0
+			health -= newDamage
+		else:
+			armor = (armor - damage)
+	else:
+		health -= damage
+		
 	EventBus.emit_signal("takenDamage", Name)
 		
 func temp_modifyDamage(baseDamage):
@@ -68,3 +76,9 @@ func reDraw():
 	var numberToDraw = intelligence - handContainer.get_child_count()
 	for i in numberToDraw:
 		drawCard()
+		
+func showDescription():
+	gameManager.showplayerDescription(self)
+
+func hideDescription():
+	gameManager.hideplayerDescription()

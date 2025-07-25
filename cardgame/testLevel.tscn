@@ -17,6 +17,6 @@ position = Vector2(180, 201)
 handContainer = NodePath("../handUI")
 
 [node name="handUI" parent="." instance=ExtResource("3_2cuvp")]
-position = Vector2(221, 477)
+position = Vector2(191, 477)
 
 [node name="battleUI" parent="." instance=ExtResource("5_hilpl")]

@@ -1,6 +1,6 @@
 extends Node2D
 
-var spacing: int = 90
+var spacing: int = 70
 var centerOffset: Vector2 = Vector2.ZERO
 
 func _ready():

@@ -7,6 +7,7 @@ var group :String
 
 
 
+
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if card:
 		if event is InputEventMouseButton and event.is_pressed():

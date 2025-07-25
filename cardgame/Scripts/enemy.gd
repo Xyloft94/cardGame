@@ -21,6 +21,7 @@ func _physics_process(delta):
 
 func takeDamage(damage: int):
 	health -= damage
+	gameManager.hideenemyDescription()
 	print("Enemy health is ", health, "The enemy was dealth ", damage, "damage")
 
 func dealDamage(amount: int):
@@ -35,10 +36,12 @@ func dealDamage(amount: int):
 func buffDamage(amount: int):
 	modifiedDamage += amount
 	Feedback(self.global_position, amount, "buff")
-	
+	gameManager.hideenemyDescription()
+
 func heal(amount):
 	health += amount
 	Feedback(self.global_position, amount, "heal")
+	gameManager.hideenemyDescription()
 
 func Attack():
 	spinWheel()

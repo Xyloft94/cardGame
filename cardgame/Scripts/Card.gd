@@ -38,7 +38,7 @@ func temp_buffDamage(amount: int, target:Node):
 	Feedback(target.global_position, amount, "buff")
 	
 func AP_nextTurn(amount: int):
-	gameManager.modAP = amount
+	gameManager.modAP += amount
 	
 func showDescription():
 	gameManager.showCardDescription(Description, APcost)
