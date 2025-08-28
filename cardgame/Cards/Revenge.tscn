@@ -12,12 +12,13 @@ size = Vector2(37, 58)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0uflk"]
 size = Vector2(36.6667, 58)
 
-[node name="Revenge" type="Node2D" node_paths=PackedStringArray("Highlight")]
+[node name="Revenge" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_xsccn")
 APcost = 1
 Description = "Deal 3 Damage, if Hurt last turn, deal 8"
 Highlight = NodePath("Highlight")
+Sprite = NodePath("Sprite2D")
 
 [node name="Highlight" parent="." instance=ExtResource("2_nplgx")]
 

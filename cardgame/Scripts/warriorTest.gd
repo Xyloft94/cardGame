@@ -16,6 +16,11 @@ var deckList :={
 var drawPile: Array[PackedScene] = []
 var intelligence: int = 5
 @export var handContainer: Node
+@export var attackLength: float
+@export var animTree: AnimationTree
+@export var particles: GPUParticles2D
+@export var slot: int
+@export var side: String
 
 
 func _ready():
@@ -25,6 +30,7 @@ func _ready():
 	gameManager.setAP()
 
 func takeDamage(damage :int):
+	hurtAnim()
 	if armor >= 0:
 		var newDamage = (damage - armor)
 		if newDamage >= armor:
@@ -82,3 +88,26 @@ func showDescription():
 
 func hideDescription():
 	gameManager.hideplayerDescription()
+
+func attackAnim():
+	print("why no work")
+	animTree.set("parameters/conditions/Attack", true)
+	await get_tree().create_timer(attackLength).timeout
+	animTree.set("parameters/conditions/Attack", false)
+
+func hurtAnim():
+	animTree.set("parameters/conditions/Hurt", true)
+	await get_tree().create_timer(.35).timeout
+	animTree.set("parameters/conditions/Hurt", false)
+	
+func emitArmor():
+	particles.modulate= Color(1,1,1)
+	particles.emitting = true
+	await get_tree().create_timer(.5).timeout
+	particles.emitting = false
+	
+func emitBuff():
+	particles.modulate= Color(1,0,0)
+	particles.emitting = true
+	await get_tree().create_timer(.5).timeout
+	particles.emitting = false

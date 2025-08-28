@@ -42,9 +42,10 @@ func deselectCard(card: Node):
 	chosenCard = null
 
 func selectedTarget(target: Node):
-	if chosenCard and chosenCard.APcost <= totalAP:
+	if chosenCard and chosenCard.APcost <= totalAP: 
 		chosenCard.play(target.parent)
 		totalAP = (totalAP - chosenCard.APcost)
+		chosenCard.Highlight.visible = false
 		battleUI.apLabel.text = ("AP: " + str(totalAP))
 		cardClicked = false
 		hideCardDescription()
@@ -116,4 +117,3 @@ func showplayerDescription(player: CharacterBody2D):
 	
 func hideplayerDescription():
 	battleUI.PlayerDescription.visible = false
-

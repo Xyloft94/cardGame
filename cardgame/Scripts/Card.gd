@@ -5,6 +5,7 @@ class_name Card
 @export var APcost :int
 @export var Description :String
 @export var Highlight :ColorRect
+@export var Sprite :Sprite2D
 
 func _physics_process(delta):
 	pass
@@ -13,6 +14,8 @@ func play(target:Node):
 	pass
 
 func discard():
+	Sprite.visible = false
+	await get_tree().create_timer(.8).timeout
 	EventBus.emit_signal("rearrangeHand")
 	queue_free()
 	
@@ -20,20 +23,27 @@ func inHand():
 	pass
 	
 func damage(amount:int, target:Node):
+	caster.attackAnim()
+	var timerLength = caster.attackLength
+	print(timerLength)
+	gameManager.hideenemyDescription()
+	await get_tree().create_timer(timerLength).timeout
 	if caster.has_method("temp_modifyDamage"):
 		amount = caster.temp_modifyDamage(amount)
-		Feedback(target.global_position, amount, "damage")
 	if target.has_method("takeDamage"):
+		print("WHORK NOW")
 		target.takeDamage(amount)
 		Feedback(target.global_position, amount, "damage")
 		
 func armor(amount:int, target:Node):
 	if target.has_method("gainArmor"):
+		caster.emitArmor()
 		target.gainArmor(amount)
 		print(target.Name, amount)
 		Feedback(target.global_position, amount, "armor")
 
 func temp_buffDamage(amount: int, target:Node):
+	caster.emitBuff()
 	caster.temp_modDamage += amount
 	Feedback(target.global_position, amount, "buff")
 	

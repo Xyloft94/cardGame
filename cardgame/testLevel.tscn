@@ -1,16 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://6a6hqqmue5mn"]
 
 [ext_resource type="Script" path="res://Scripts/testLevel.gd" id="1_komnh"]
-[ext_resource type="PackedScene" uid="uid://b0d7t8gi0wlq0" path="res://enemy.tscn" id="2_pm7cg"]
 [ext_resource type="PackedScene" uid="uid://1p1nehy4edb8" path="res://handUI.tscn" id="3_2cuvp"]
 [ext_resource type="PackedScene" uid="uid://cdw86nxxni67b" path="res://warriorTest.tscn" id="3_uivg0"]
 [ext_resource type="PackedScene" uid="uid://q75760mcnusx" path="res://battleUI.tscn" id="5_hilpl"]
+[ext_resource type="PackedScene" uid="uid://7tnastswnm1p" path="res://minotaur.tscn" id="5_shde2"]
 
 [node name="testLevel" type="Node2D"]
 script = ExtResource("1_komnh")
-
-[node name="enemy" parent="." instance=ExtResource("2_pm7cg")]
-position = Vector2(556, 191)
 
 [node name="warriorTest" parent="." node_paths=PackedStringArray("handContainer") instance=ExtResource("3_uivg0")]
 position = Vector2(180, 201)
@@ -20,3 +17,6 @@ handContainer = NodePath("../handUI")
 position = Vector2(191, 477)
 
 [node name="battleUI" parent="." instance=ExtResource("5_hilpl")]
+
+[node name="Minotaur" parent="." instance=ExtResource("5_shde2")]
+position = Vector2(556, 229)

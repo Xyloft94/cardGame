@@ -12,12 +12,13 @@ size = Vector2(40, 59.3333)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuojp"]
 size = Vector2(38.6667, 60.6667)
 
-[node name="Crushing_Blow" type="Node2D" node_paths=PackedStringArray("Highlight")]
+[node name="Crushing_Blow" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_bd6i0")
 APcost = 3
 Description = "Deals 14 Damage, if Player has 10 or more Armor, this Attack costs 1"
 Highlight = NodePath("Highlight")
+Sprite = NodePath("Sprite2D")
 
 [node name="Highlight" parent="." instance=ExtResource("2_400av")]
 

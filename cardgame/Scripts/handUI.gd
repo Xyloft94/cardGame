@@ -19,6 +19,6 @@ func arrangeHand():
 		card.position = Vector2(leftmostCardPosition + i * spacing, 0) + centerOffset
 
 func rearrangeHand():
-	await get_tree().create_timer(.25).timeout
+	await get_tree().create_timer(.05).timeout
 	arrangeHand()
 	

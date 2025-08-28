@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://48tv7b73kuq3"]
+
+[ext_resource type="Script" path="res://test_battlefield.gd" id="1_8d5nn"]
+
+[node name="testBattlefield" type="Node2D" node_paths=PackedStringArray("p0", "p1", "p2", "e0", "e1", "e2", "e3")]
+script = ExtResource("1_8d5nn")
+p0 = NodePath("Playerslots/P0")
+p1 = NodePath("Playerslots/P1")
+p2 = NodePath("Playerslots/P2")
+e0 = NodePath("Enemyslots/E0")
+e1 = NodePath("Enemyslots/E1")
+e2 = NodePath("Enemyslots/E2")
+e3 = NodePath("Enemyslots/E3")
+
+[node name="Playerslots" type="Node2D" parent="."]
+
+[node name="P0" type="Marker2D" parent="Playerslots"]
+position = Vector2(250, 300)
+
+[node name="P1" type="Marker2D" parent="Playerslots"]
+position = Vector2(190, 235)
+
+[node name="P2" type="Marker2D" parent="Playerslots"]
+position = Vector2(115, 300)
+
+[node name="Enemyslots" type="Node2D" parent="."]
+
+[node name="E0" type="Marker2D" parent="Enemyslots"]
+position = Vector2(416, 300)
+
+[node name="E2" type="Marker2D" parent="Enemyslots"]
+position = Vector2(546, 300)
+
+[node name="E3" type="Marker2D" parent="Enemyslots"]
+position = Vector2(602, 235)
+
+[node name="E1" type="Marker2D" parent="Enemyslots"]
+position = Vector2(471, 235)

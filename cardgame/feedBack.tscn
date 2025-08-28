@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvpcyhp5q1v25"]
 
-[ext_resource type="Script" path="res://feedBack.gd" id="1_pc0b1"]
+[ext_resource type="Script" path="res://Scripts/feedBack.gd" id="1_pc0b1"]
 [ext_resource type="Texture2D" uid="uid://d1qchx16jm3we" path="res://Art/Arrow.png" id="2_84aqf"]
 
 [sub_resource type="Animation" id="Animation_4ncsl"]

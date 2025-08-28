@@ -12,12 +12,13 @@ size = Vector2(41, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mo725"]
 size = Vector2(40.6667, 58)
 
-[node name="Rage" type="Node2D" node_paths=PackedStringArray("Highlight")]
+[node name="Rage" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_bb5n2")
 APcost = 1
 Description = "Next Attack deals 4 more Damage"
 Highlight = NodePath("Highlight")
+Sprite = NodePath("Sprite2D")
 
 [node name="Highlight" parent="." instance=ExtResource("2_qxvua")]
 
