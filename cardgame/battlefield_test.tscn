@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxmkaulx2yip8"]
+
+[ext_resource type="Script" path="res://Battlefield_Test.gd" id="1_2gno3"]
+[ext_resource type="PackedScene" uid="uid://7tnastswnm1p" path="res://minotaur.tscn" id="2_00ruy"]
+[ext_resource type="PackedScene" uid="uid://q75760mcnusx" path="res://battleUI.tscn" id="3_sb7he"]
+[ext_resource type="PackedScene" uid="uid://cdw86nxxni67b" path="res://warriorTest.tscn" id="3_wq5er"]
+[ext_resource type="PackedScene" uid="uid://1p1nehy4edb8" path="res://handUI.tscn" id="4_phqva"]
+
+[node name="Battlefield_Test" type="Node2D" node_paths=PackedStringArray("enemySlots", "playerSlots", "handUI")]
+script = ExtResource("1_2gno3")
+enemy1 = ExtResource("2_00ruy")
+enemy2 = ExtResource("2_00ruy")
+enemy3 = ExtResource("2_00ruy")
+enemy4 = ExtResource("2_00ruy")
+player = ExtResource("3_wq5er")
+enemySlots = NodePath("enemySlots")
+playerSlots = NodePath("playerSlots")
+handUI = NodePath("handUI")
+
+[node name="enemySlots" type="Node2D" parent="."]
+position = Vector2(-25, -50)
+
+[node name="Marker2D" type="Marker2D" parent="enemySlots"]
+position = Vector2(484, 398)
+
+[node name="Marker2D2" type="Marker2D" parent="enemySlots"]
+position = Vector2(419, 263)
+
+[node name="Marker2D3" type="Marker2D" parent="enemySlots"]
+position = Vector2(559, 191)
+
+[node name="Marker2D4" type="Marker2D" parent="enemySlots"]
+position = Vector2(616, 330)
+
+[node name="playerSlots" type="Node2D" parent="."]
+position = Vector2(-100, -50)
+
+[node name="Marker2D" type="Marker2D" parent="playerSlots"]
+position = Vector2(277, 356)
+
+[node name="battleUI" parent="." instance=ExtResource("3_sb7he")]
+
+[node name="handUI" parent="." instance=ExtResource("4_phqva")]
+position = Vector2(267, 473)

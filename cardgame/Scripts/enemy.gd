@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 @export var health :int 
-@onready var player :Node = get_tree().get_first_node_in_group("Player")
+var Player :CharacterBody2D
 var attackWheelValue :int
 var modifiedDamage :int = 0
 var attackFunctions: Array[Callable] = []
@@ -11,16 +11,14 @@ var attackFunctions: Array[Callable] = []
 @export var animTree: AnimationTree
 @export var attackLength: float
 @export var hitLength: float
+@export var deathLength: float
 @export var particles: GPUParticles2D
-@export var slot: int
 @export var side: String
 
 
 func _ready():
-	gameManager.Enemy = self
-#func _input(event):
-	#if event.is_action_pressed("Space"):
-		#Attack()
+	pass
+	#gameManager.Enemy = self
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("Space"):
@@ -34,21 +32,23 @@ func takeDamage(damage: int):
 	
 	Feedback(self.global_position, damage, "damage")
 	print("Enemy health is ", health, "The enemy was dealth ", damage, "damage")
+	if health <= 0:
+		die()
 
 func dealDamage(amount: int):
 	if modifiedDamage <= 0:
 		amount += modifiedDamage
 		attackAnim()
 		await get_tree().create_timer(attackLength).timeout
-		player.takeDamage(amount)
-		Feedback(player.global_position, amount, "damage")
+		Player.takeDamage(amount)
+		Feedback(Player.global_position, amount, "damage")
 		modifiedDamage = 0
 	else:
 		attackAnim()
 		await get_tree().create_timer(attackLength).timeout
-		player.takeDamage(amount)
-		Feedback(player.global_position, amount, "damage")
-		player.takeDamage(amount)
+		Player.takeDamage(amount)
+		Feedback(Player.global_position, amount, "damage")
+		Player.takeDamage(amount)
 
 func buffDamage(amount: int):
 	modifiedDamage += amount
@@ -63,6 +63,7 @@ func heal(amount):
 	gameManager.hideenemyDescription()
 
 func Attack():
+	print("should be attacking")
 	var result = spinWheel()
 	
 	if result <= attackFunctions.size():
@@ -82,7 +83,7 @@ func Attack():
 			#dealDamage(3)
 			#await get_tree().create_timer(.5).timeout
 			#buffDamage(2)
-	gameManager.endEnemyTurn()
+	#gameManager.endEnemyTurn()
 
 	
 func spinWheel():
@@ -149,3 +150,10 @@ func emitBuff():
 	particles.emitting = true
 	await get_tree().create_timer(.5).timeout
 	particles.emitting = false
+
+func die():
+	if gameManager.enemyTeam.has(self):
+		gameManager.enemyTeam.erase(self)
+		animTree.set("parameters/conditions/Death", true)
+		await get_tree().create_timer(deathLength).timeout
+		queue_free()

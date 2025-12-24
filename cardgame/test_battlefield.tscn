@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://48tv7b73kuq3"]
+[gd_scene load_steps=4 format=3 uid="uid://48tv7b73kuq3"]
 
 [ext_resource type="Script" path="res://test_battlefield.gd" id="1_8d5nn"]
+[ext_resource type="PackedScene" uid="uid://1p1nehy4edb8" path="res://handUI.tscn" id="2_bmsyi"]
+[ext_resource type="PackedScene" uid="uid://q75760mcnusx" path="res://battleUI.tscn" id="3_dnn2c"]
 
 [node name="testBattlefield" type="Node2D" node_paths=PackedStringArray("p0", "p1", "p2", "e0", "e1", "e2", "e3")]
 script = ExtResource("1_8d5nn")
@@ -11,6 +13,12 @@ e0 = NodePath("Enemyslots/E0")
 e1 = NodePath("Enemyslots/E1")
 e2 = NodePath("Enemyslots/E2")
 e3 = NodePath("Enemyslots/E3")
+
+[node name="battleUI" parent="." instance=ExtResource("3_dnn2c")]
+visible = false
+
+[node name="handUI" parent="." instance=ExtResource("2_bmsyi")]
+visible = false
 
 [node name="Playerslots" type="Node2D" parent="."]
 

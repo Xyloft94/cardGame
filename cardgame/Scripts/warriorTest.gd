@@ -15,19 +15,15 @@ var deckList :={
 }
 var drawPile: Array[PackedScene] = []
 var intelligence: int = 5
-@export var handContainer: Node
+var handContainer: Node2D
 @export var attackLength: float
 @export var animTree: AnimationTree
 @export var particles: GPUParticles2D
-@export var slot: int
-@export var side: String
 
 
 func _ready():
 	setupDeck()
 	drawHand()
-	gameManager.Player = self
-	gameManager.setAP()
 
 func takeDamage(damage :int):
 	hurtAnim()

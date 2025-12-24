@@ -10,8 +10,8 @@ var currentTurn = TurnOrder.PLAYER
 #var Player = get_tree().get_first_node_in_group("Player")
 var battleUI :CanvasLayer = null
 var cardClicked :bool = false
-var Player: CharacterBody2D 
-var Enemy: CharacterBody2D 
+var Player: CharacterBody2D
+var enemyTeam: Array = []
 var canChooseCard: bool 
 enum TurnOrder {PLAYER, ENEMY}
 
@@ -58,7 +58,13 @@ func playerTurn():
 	modAP = 0
 
 func enemyTurn():
-	Enemy.Attack()
+	print("this is the enemy turn")
+	#team is duplicated each time the loop runs, to ensure that dead enemies aren't counted
+	for currentEnemy in enemyTeam.duplicate():
+		if is_instance_valid(currentEnemy):
+			currentEnemy.Attack()
+			await get_tree().create_timer(currentEnemy.attackLength + 0.5).timeout
+	endEnemyTurn()
 
 func endPlayerTurn():
 	warriorHurt = false

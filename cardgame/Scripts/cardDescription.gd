@@ -15,6 +15,7 @@ extends CanvasLayer
 @export var playerArmor: Label
 
 func _ready():
+	await get_tree().create_timer(.1).timeout
 	apLabel.text = ("AP: " + str(gameManager.totalAP))
 	
 

@@ -178,7 +178,6 @@ script = ExtResource("1_qx86s")
 attackLength = 0.5
 animTree = NodePath("AnimationTree")
 particles = NodePath("GPUParticles2D")
-side = "Player"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)
@@ -210,6 +209,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ffgc2")
+}
 tree_root = SubResource("AnimationNodeStateMachine_vmq1q")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/Attack = false
