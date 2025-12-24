@@ -22,10 +22,12 @@ func _ready():
 func spawnPlayers():
 	var markers = playerSlots.get_children()
 	var newPlayer = player.instantiate()
-	newPlayer.handContainer = handUI
+	var hand_comp = newPlayer.get_node("handComponent")
+	hand_comp.handContainer = handUI
 	markers[0].add_child(newPlayer)
 	gameManager.Player = newPlayer
-	newPlayer.position = Vector2.ZERO
+	hand_comp.setupDeck()
+	hand_comp.drawHand()
 	gameManager.setAP()
 
 func spawnEnemies():

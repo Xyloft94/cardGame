@@ -1,9 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://b5utpk1fpok47"]
+[gd_scene load_steps=24 format=3 uid="uid://b5utpk1fpok47"]
 
+[ext_resource type="Script" path="res://warrior.gd" id="1_fbkdh"]
 [ext_resource type="Texture2D" uid="uid://vtbs8i17f66t" path="res://Art/Warrior.png" id="2_wi4pn"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_o4ctm"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_26rxv"]
 [ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_i5toq"]
+[ext_resource type="PackedScene" uid="uid://ccdvbdhacvgq4" path="res://hand_component.tscn" id="6_6f8o8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwffa"]
 radius = 29.0
@@ -172,7 +174,14 @@ states/Idle/node = SubResource("AnimationNodeAnimation_7wqrd")
 states/Idle/position = Vector2(488, 89)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2n87w"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_ghcyb"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_l08yx"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_m0bu5"), "Idle", "Hurt", SubResource("AnimationNodeStateMachineTransition_7gkhd")]
 
-[node name="warriorTest" type="CharacterBody2D" groups=["Player", "Warrior"]]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("handComponent", "animTree", "particles") groups=["Player", "Warrior"]]
+script = ExtResource("1_fbkdh")
+AP = 3
+intelligence = 5
+handComponent = NodePath("handComponent")
+attackLength = 0.5
+animTree = NodePath("AnimationTree")
+particles = NodePath("GPUParticles2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)
@@ -212,6 +221,8 @@ parameters/conditions/Hurt = false
 [node name="GPUParticles2D" parent="." instance=ExtResource("5_i5toq")]
 position = Vector2(15, 50)
 emitting = false
+
+[node name="handComponent" parent="." instance=ExtResource("6_6f8o8")]
 
 [editable path="clickBox"]
 [editable path="hoverBox"]

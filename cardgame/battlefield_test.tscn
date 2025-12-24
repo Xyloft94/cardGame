@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Battlefield_Test.gd" id="1_2gno3"]
 [ext_resource type="PackedScene" uid="uid://7tnastswnm1p" path="res://minotaur.tscn" id="2_00ruy"]
+[ext_resource type="PackedScene" uid="uid://b5utpk1fpok47" path="res://Warrior.tscn" id="3_mex1a"]
 [ext_resource type="PackedScene" uid="uid://q75760mcnusx" path="res://battleUI.tscn" id="3_sb7he"]
-[ext_resource type="PackedScene" uid="uid://cdw86nxxni67b" path="res://warriorTest.tscn" id="3_wq5er"]
 [ext_resource type="PackedScene" uid="uid://1p1nehy4edb8" path="res://handUI.tscn" id="4_phqva"]
 
 [node name="Battlefield_Test" type="Node2D" node_paths=PackedStringArray("enemySlots", "playerSlots", "handUI")]
@@ -12,7 +12,7 @@ enemy1 = ExtResource("2_00ruy")
 enemy2 = ExtResource("2_00ruy")
 enemy3 = ExtResource("2_00ruy")
 enemy4 = ExtResource("2_00ruy")
-player = ExtResource("3_wq5er")
+player = ExtResource("3_mex1a")
 enemySlots = NodePath("enemySlots")
 playerSlots = NodePath("playerSlots")
 handUI = NodePath("handUI")

@@ -15,6 +15,10 @@ func _ready():
 	
 
 func setupDeck():
+	if owner:
+		intelligence = owner.intelligence
+		deckList = owner.deckList
+	drawPile.clear()
 	for path in deckList.keys():
 		var count = deckList[path]
 		var cardScene = load(path)

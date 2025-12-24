@@ -10,13 +10,14 @@ var temp_modDamage: int = 0
 var deckList :={}
 var drawPile: Array[PackedScene] = []
 @export var intelligence: int 
-var handContainer: Node2D
+@export var handComponent: Node2D
 @export var attackLength: float
 @export var animTree: AnimationTree
 @export var particles: GPUParticles2D
 
 
-
+func _ready():
+	pass
 
 func takeDamage(damage :int):
 	hurtAnim()
@@ -45,33 +46,8 @@ func gainArmor(amount: int):
 func armorCheck():
 	if armor >= 10:
 		EventBus.emit_signal("newAP_Cost", 1)
-		
-func setupDeck():
-	for path in deckList.keys():
-		var count = deckList[path]
-		var cardScene = load(path)
-		for i in count:
-			drawPile.append(cardScene)
-	drawPile.shuffle()
-	
-func drawHand():
-	for i in intelligence:
-		drawCard()
-		
-func drawCard():
-	if drawPile.is_empty():
-		return
-	var cardScene = drawPile.pop_front()
-	var card = cardScene.instantiate()
-	card.caster = self
-	handContainer.add_child(card)
-	handContainer.arrangeHand()
-	
-func reDraw():
-	var numberToDraw = intelligence - handContainer.get_child_count()
-	for i in numberToDraw:
-		drawCard()
-		
+
+
 func showDescription():
 	gameManager.showplayerDescription(self)
 

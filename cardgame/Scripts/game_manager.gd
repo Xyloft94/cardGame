@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var discriptionLabel: Label
+
 var chosenCard: Node = null
 var totalAP: int 
 var modAP: int
@@ -10,7 +11,7 @@ var currentTurn = TurnOrder.PLAYER
 #var Player = get_tree().get_first_node_in_group("Player")
 var battleUI :CanvasLayer = null
 var cardClicked :bool = false
-var Player: CharacterBody2D
+var Player: Player
 var enemyTeam: Array = []
 var canChooseCard: bool 
 enum TurnOrder {PLAYER, ENEMY}
@@ -54,7 +55,7 @@ func selectedTarget(target: Node):
 
 func playerTurn():
 	resetAP()
-	Player.reDraw()
+	Player.handComponent.reDraw()
 	modAP = 0
 
 func enemyTurn():
