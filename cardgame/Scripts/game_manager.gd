@@ -11,16 +11,23 @@ var currentTurn = TurnOrder.PLAYER
 #var Player = get_tree().get_first_node_in_group("Player")
 var battleUI :CanvasLayer = null
 var cardClicked :bool = false
-var Player: Player
+var playerTeam: Array = []
+var Player1: Player
+var Player2: Player
 var enemyTeam: Array = []
 var canChooseCard: bool 
+var activePlayer: Player
 enum TurnOrder {PLAYER, ENEMY}
 
 
 func _ready():
-	EventBus.connect("takenDamage", Callable(self, "takenDamage"))
+	var warriorScene = load("res://Warrior.tscn")
+	Player1 = warriorScene.instantiate()
+	Player2 = warriorScene.instantiate()
+	playerTeam.append(Player1)
+	playerTeam.append(Player2)
+	activePlayer = Player1
 	canChooseCard = true
-	
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("declick") and not canChooseCard:
@@ -28,11 +35,15 @@ func _physics_process(delta):
 		deselectCard(chosenCard)
 
 func selectedCard(card: Node):
+	print("Clicked card: ", card.name)
+	print("Can I choose? ", canChooseCard)
 	if canChooseCard:
 		chosenCard = card
-		chosenCard.Highlight.visible = true
+		if chosenCard.Highlight:
+			chosenCard.Highlight.visible = true
 		cardClicked = true
 		canChooseCard = false
+		print("Card Selected Successfully!")
 
 func deselectCard(card: Node):
 	print("de-select card bro")
@@ -55,12 +66,18 @@ func selectedTarget(target: Node):
 
 func playerTurn():
 	resetAP()
-	Player.handComponent.reDraw()
 	modAP = 0
+	
+	# Loop through every player in the team and have them refill their hand
+	for member in playerTeam:
+		if is_instance_valid(member):
+			member.handComponent.reDraw()
+	
+	# Ensure the UI reflects the current active player's hand immediately
+	battleUI.handUI.arrangeHand()
 
 func enemyTurn():
 	print("this is the enemy turn")
-	#team is duplicated each time the loop runs, to ensure that dead enemies aren't counted
 	for currentEnemy in enemyTeam.duplicate():
 		if is_instance_valid(currentEnemy):
 			currentEnemy.Attack()
@@ -85,14 +102,27 @@ func takenDamage(Name:String):
 			wizardHurt = true
 
 func setAP():
-	totalAP = Player.AP
+	var teamTotal = 0
+	for member in playerTeam:
+		if is_instance_valid(member):
+			teamTotal+= member.AP
+	totalAP = teamTotal
 
 func resetAP():
-	if modAP > 0:
-		totalAP = (modAP + 3)
-	else:
-		totalAP = 3
-	battleUI.apLabel.text = ("AP: " + str(totalAP))
+	# 1. Calculate the team's total AP capacity
+	var teamTotal = 0
+	for member in playerTeam:
+		if is_instance_valid(member):
+			teamTotal += member.AP # Assumes your Warrior script has a 'var AP'
+	
+	# 2. Add any bonus AP from the previous turn (modAP)
+	totalAP = teamTotal + modAP
+	
+	# 3. Update the UI label
+	if battleUI and battleUI.apLabel:
+		battleUI.apLabel.text = ("AP: " + str(totalAP))
+	
+	print("AP Reset! New total: ", totalAP)
 	
 	
 func showCardDescription(Description:String, cost:int):
@@ -124,3 +154,21 @@ func showplayerDescription(player: CharacterBody2D):
 	
 func hideplayerDescription():
 	battleUI.PlayerDescription.visible = false
+
+func setActivePlayer(newPlayer: Player):
+	if activePlayer == newPlayer: 
+		return
+	if activePlayer != null:
+		var cards_to_move = battleUI.handUI.get_children()
+		for card in cards_to_move:
+			battleUI.handUI.remove_child(card)
+			activePlayer.handComponent.add_child(card)
+			card.visible = false
+	activePlayer = newPlayer
+	for card in activePlayer.handComponent.get_children():
+		if card is Card: 
+			activePlayer.handComponent.remove_child(card)
+			battleUI.handUI.add_child(card)
+			card.visible = true
+	battleUI.handUI.arrangeHand()
+	showplayerDescription(activePlayer)

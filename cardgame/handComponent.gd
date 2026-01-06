@@ -36,8 +36,12 @@ func drawCard():
 	var cardScene = drawPile.pop_front()
 	var card = cardScene.instantiate()
 	card.caster = owner
-	handContainer.add_child(card)
-	handContainer.arrangeHand()
+	if gameManager.activePlayer != owner:
+		add_child(card)
+		card.visible = false
+	else:
+		handContainer.add_child(card)
+		handContainer.arrangeHand()
 	
 func reDraw():
 	var numberToDraw = intelligence - handContainer.get_child_count()

@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@export var handUI: Node2D
 @export var Card: Panel 
 @export var Description: Label
 @export var costAP: Label

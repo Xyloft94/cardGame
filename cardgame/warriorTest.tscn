@@ -191,6 +191,7 @@ shape = SubResource("CapsuleShape2D_fwffa")
 
 [node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_r72qb")]
 parent = NodePath("..")
+player = true
 
 [node name="CollisionShape2D" parent="clickBox" index="0"]
 position = Vector2(2, 4)

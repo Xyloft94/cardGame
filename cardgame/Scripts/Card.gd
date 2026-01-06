@@ -1,7 +1,7 @@
 extends Node2D
 class_name Card
 
-@onready var caster = get_tree().get_first_node_in_group("Warrior")
+var caster :Node2D
 @export var APcost :int
 @export var Description :String
 @export var Highlight :ColorRect
@@ -37,7 +37,7 @@ func damage(amount:int, target:Node):
 		
 func armor(amount:int, target:Node):
 	if target.has_method("gainArmor"):
-		caster.emitArmor()
+		target.emitArmor()
 		target.gainArmor(amount)
 		print(target.Name, amount)
 		Feedback(target.global_position, amount, "armor")
