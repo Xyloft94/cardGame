@@ -9,7 +9,7 @@ extends Node2D
 @export var enemySlots: Node2D
 @export var playerSlots: Node2D
 @export var handUI: Node2D
-@onready var Enemies = [enemy1, enemy2]
+@onready var Enemies = [enemy1, enemy2, enemy3, enemy4]
 
 
 

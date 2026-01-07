@@ -1,12 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5utpk1fpok47"]
+[gd_scene load_steps=25 format=3 uid="uid://dw02evcbdf5p5"]
 
-[ext_resource type="Script" path="res://warrior.gd" id="1_fbkdh"]
-[ext_resource type="Texture2D" uid="uid://vtbs8i17f66t" path="res://Art/Warrior.png" id="2_wi4pn"]
-[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_o4ctm"]
-[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_26rxv"]
-[ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_i5toq"]
-[ext_resource type="PackedScene" uid="uid://ccdvbdhacvgq4" path="res://hand_component.tscn" id="6_6f8o8"]
-[ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="7_ush4x"]
+[ext_resource type="Script" path="res://wizard.gd" id="1_bfwv4"]
+[ext_resource type="Texture2D" uid="uid://1ksfyhesgey8" path="res://Art/Wizard-Recovered-sheet.png" id="2_dnnyv"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_8icgt"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_jsxca"]
+[ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_yfkdd"]
+[ext_resource type="PackedScene" uid="uid://ccdvbdhacvgq4" path="res://hand_component.tscn" id="6_4s4np"]
+[ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="7_8tdf5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwffa"]
 radius = 29.0
@@ -85,10 +85,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.3, 0.466667, 0.666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_tccr5"]
@@ -175,12 +175,12 @@ states/Idle/node = SubResource("AnimationNodeAnimation_7wqrd")
 states/Idle/position = Vector2(488, 89)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2n87w"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_ghcyb"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_l08yx"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_m0bu5"), "Idle", "Hurt", SubResource("AnimationNodeStateMachineTransition_7gkhd")]
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("handComponent", "animTree", "particles", "statusComponent") groups=["Player", "Warrior"]]
-script = ExtResource("1_fbkdh")
-health = 50
-Name = "Warrior"
+[node name="Wizard" type="CharacterBody2D" node_paths=PackedStringArray("handComponent", "animTree", "particles", "statusComponent") groups=["Player", "Warrior"]]
+script = ExtResource("1_bfwv4")
+health = 7
+Name = "Wizard"
 AP = 3
-intelligence = 5
+intelligence = 6
 handComponent = NodePath("handComponent")
 attackLength = 0.5
 animTree = NodePath("AnimationTree")
@@ -189,15 +189,15 @@ statusComponent = NodePath("statusComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)
-texture = ExtResource("2_wi4pn")
+texture = ExtResource("2_dnnyv")
 flip_h = true
-hframes = 5
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 3)
 shape = SubResource("CapsuleShape2D_fwffa")
 
-[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_o4ctm")]
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_8icgt")]
 parent = NodePath("..")
 player = true
 
@@ -205,7 +205,7 @@ player = true
 position = Vector2(2, 4)
 shape = SubResource("RectangleShape2D_i5vb2")
 
-[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") groups=["Player", "Warrior"] instance=ExtResource("4_26rxv")]
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") groups=["Player", "Warrior"] instance=ExtResource("4_jsxca")]
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="hoverBox" index="0"]
@@ -223,13 +223,13 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/Attack = false
 parameters/conditions/Hurt = false
 
-[node name="GPUParticles2D" parent="." instance=ExtResource("5_i5toq")]
+[node name="GPUParticles2D" parent="." instance=ExtResource("5_yfkdd")]
 position = Vector2(15, 50)
 emitting = false
 
-[node name="handComponent" parent="." instance=ExtResource("6_6f8o8")]
+[node name="handComponent" parent="." instance=ExtResource("6_4s4np")]
 
-[node name="statusComponent" parent="." instance=ExtResource("7_ush4x")]
+[node name="statusComponent" parent="." instance=ExtResource("7_8tdf5")]
 
 [editable path="clickBox"]
 [editable path="hoverBox"]

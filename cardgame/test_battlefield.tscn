@@ -1,11 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://48tv7b73kuq3"]
+[gd_scene load_steps=4 format=3 uid="uid://dpd6l12c1uayd"]
 
-[ext_resource type="Script" path="res://test_battlefield.gd" id="1_8d5nn"]
 [ext_resource type="PackedScene" uid="uid://1p1nehy4edb8" path="res://handUI.tscn" id="2_bmsyi"]
 [ext_resource type="PackedScene" uid="uid://q75760mcnusx" path="res://battleUI.tscn" id="3_dnn2c"]
 
+[sub_resource type="GDScript" id="GDScript_tugbf"]
+script/source = "extends Node2D
+
+var playerSlots: Array = [p0,p1,p2]
+var enemySlots: Array = [e0,e1,e2,e3]
+@export var p0 : Marker2D
+@export var p1 : Marker2D
+@export var p2 : Marker2D
+@export var e0 : Marker2D
+@export var e1 : Marker2D
+@export var e2 : Marker2D
+@export var e3 : Marker2D
+
+
+func _ready() -> void:
+	pass # Replace with function body.
+
+func placeChar(char:CharacterBody2D):
+	if char.side == \"Player\":
+		var slot = playerSlots[char.slotNumber]
+		char.global_position = slot.global_position
+		add_child(char)
+	elif char.side == \"Enemy\":
+		var slot = enemySlots[char.slotNumber]
+		char.global_position = slot.global_position
+		add_child(char)
+"
+
 [node name="testBattlefield" type="Node2D" node_paths=PackedStringArray("p0", "p1", "p2", "e0", "e1", "e2", "e3")]
-script = ExtResource("1_8d5nn")
+script = SubResource("GDScript_tugbf")
 p0 = NodePath("Playerslots/P0")
 p1 = NodePath("Playerslots/P1")
 p2 = NodePath("Playerslots/P2")

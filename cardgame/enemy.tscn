@@ -13,9 +13,6 @@ size = Vector2(124, 127)
 
 [node name="enemy" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_yrbui")
-health = 30
-Name = "Enemy"
-wheelSize = 4
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-12, 5)

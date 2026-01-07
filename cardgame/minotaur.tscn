@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://7tnastswnm1p"]
+[gd_scene load_steps=27 format=3 uid="uid://7tnastswnm1p"]
 
 [ext_resource type="Script" path="res://minotaur.gd" id="1_vpmwg"]
 [ext_resource type="Texture2D" uid="uid://jq6noahrwslh" path="res://Art/animatedMinotaur.png" id="2_3o6j7"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_nxw0q"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_gfb6o"]
 [ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_rmwm8"]
+[ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="6_s8rl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ng7kb"]
 size = Vector2(26, 28)
@@ -329,19 +330,18 @@ states/Idle/node = SubResource("AnimationNodeAnimation_txusc")
 states/Idle/position = Vector2(467, 76)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by8tx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lohhv"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_pumay"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_bt4rw"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_5a6or"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_3m2vi")]
 
-[node name="Minotaur" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "particles")]
+[node name="Minotaur" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "particles", "statusComponent")]
 modulate = Color(1, 1, 1, 0.756863)
 scale = Vector2(4, 4)
 script = ExtResource("1_vpmwg")
-health = 30
-Description = "Buff dude who gets buff, ans smash butt"
-Name = "Minotauro"
-wheelSize = 5
+health = 10
+Name = "Minotaur"
 animTree = NodePath("AnimationTree")
 attackLength = 0.5
-hitLength = 0.35
-deathLength = 0.9
+hitLength = 0.25
+deathLength = 0.5
 particles = NodePath("GPUParticles2D")
+statusComponent = NodePath("statusComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_3o6j7")
@@ -380,6 +380,8 @@ parameters/conditions/Hit = false
 position = Vector2(0.25, 15)
 scale = Vector2(1, 1)
 emitting = false
+
+[node name="statusComponent" parent="." instance=ExtResource("6_s8rl3")]
 
 [editable path="clickBox"]
 [editable path="hoverBox"]

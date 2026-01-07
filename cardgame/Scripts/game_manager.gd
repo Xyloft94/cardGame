@@ -22,8 +22,14 @@ enum TurnOrder {PLAYER, ENEMY}
 
 func _ready():
 	var warriorScene = load("res://Warrior.tscn")
+	var wizardScene = load("res://Wizard.tscn")
 	Player1 = warriorScene.instantiate()
 	Player2 = warriorScene.instantiate()
+	
+	# YOU MUST ADD THEM TO THE SCENE
+	add_child(Player1)
+	add_child(Player2)
+	
 	playerTeam.append(Player1)
 	playerTeam.append(Player2)
 	activePlayer = Player1
@@ -63,30 +69,37 @@ func selectedTarget(target: Node):
 		hideCardDescription()
 		canChooseCard = true 
 
-
 func playerTurn():
 	resetAP()
 	modAP = 0
 	
-	# Loop through every player in the team and have them refill their hand
+	# 1. Trigger everything instantly
 	for member in playerTeam:
 		if is_instance_valid(member):
+			if member.has_method("start_turn"):
+				member.start_turn() # No await here
 			member.handComponent.reDraw()
 	
-	# Ensure the UI reflects the current active player's hand immediately
+	# 2. Arrange the UI
 	battleUI.handUI.arrangeHand()
+	
+	# 3. One single wait so the player can see any DOT damage that just happened
+	await get_tree().create_timer(1.0).timeout
+	print("Player Turn Ready")
 
 func enemyTurn():
 	print("this is the enemy turn")
 	for currentEnemy in enemyTeam.duplicate():
 		if is_instance_valid(currentEnemy):
 			currentEnemy.Attack()
-			await get_tree().create_timer(currentEnemy.attackLength + 0.5).timeout
+			await get_tree().create_timer(currentEnemy.attackLength + 0.8).timeout
+	await get_tree().create_timer(1).timeout
 	endEnemyTurn()
 
 func endPlayerTurn():
-	warriorHurt = false
-	wizardHurt = false
+	for member in playerTeam:
+		if is_instance_valid(member):
+			member.wasHurt = false
 	enemyTurn()
 
 func endEnemyTurn():
@@ -136,21 +149,45 @@ func hideCardDescription():
 	else:
 		pass
 
-func showenemyDescription(enemy: CharacterBody2D):
+func showenemyDescription(enemy: CharacterBody2D, status_text: String = ""):
 	battleUI.EnemyDescription.visible = true
 	battleUI.enemyName.text = enemy.Name
-	battleUI.enemyHealth.text = ("Health : " + str(enemy.health))
+	battleUI.enemyHealth.text = ("Health: " + str(enemy.health))
+	battleUI.enemyArmor.text = ("Armor: " + str(enemy.armor))
+	
+	# This label now ONLY handles the modifiedDamage buff
 	battleUI.enemyBuffs.text = ("Attack + " + str(enemy.modifiedDamage))
+	
+	# Use your dedicated Status label at the bottom of the VBox
+	# Note: Replace 'StatusLabel' with the exact name of your node in battleUI
+	if status_text != "":
+		battleUI.enemyStatus.text = status_text
+		battleUI.enemyStatus.visible = true
+	else:
+		battleUI.enemyStatus.text = ""
+		battleUI.enemyStatus.visible = false
 
 func hideenemyDescription():
 	battleUI.EnemyDescription.visible = false
 
-func showplayerDescription(player: CharacterBody2D):
+func showplayerDescription(player: Player, status_text: String = ""):
 	battleUI.PlayerDescription.visible = true
 	battleUI.playerName.text = player.Name
-	battleUI.playerHealth.text = ("Health : " + str(player.health))
+	battleUI.playerHealth.text = ("Health: " + str(player.health))
+	battleUI.playerArmor.text = ("Armor: " + str(player.armor))
 	battleUI.playerBuffs.text = ("Attack + " + str(player.temp_modDamage))
-	battleUI.playerArmor.text = ("Armor : " + str(player.armor))
+	
+	# Instead of has_node, use a direct reference if you set it up in battleUI
+	# Or, if playerStatus is a child of PlayerDescription:
+	var label = battleUI.playerStatus
+	
+	if label:
+		# If status_text is empty, we show nothing. 
+		# If it has text, we update the label.
+		label.text = status_text
+		label.visible = (status_text != "")
+	else:
+		print("UI Warning: Could not find 'playerStatus' label in PlayerDescription panel")
 	
 func hideplayerDescription():
 	battleUI.PlayerDescription.visible = false

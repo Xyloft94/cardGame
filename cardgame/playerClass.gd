@@ -2,18 +2,20 @@ extends CharacterBody2D
 class_name Player
 
 
-var health: int = 10
+@export var health: int 
 var armor: int = 0
-var Name: String = "Warrior"
+@export var Name: String 
 var temp_modDamage: int = 0
 @export var AP: int  
 var deckList :={}
 var drawPile: Array[PackedScene] = []
+var wasHurt: bool = false
 @export var intelligence: int 
 @export var handComponent: Node2D
 @export var attackLength: float
 @export var animTree: AnimationTree
 @export var particles: GPUParticles2D
+@export var statusComponent: Node2D
 
 
 func _ready():
@@ -21,6 +23,8 @@ func _ready():
 
 func takeDamage(damage :int):
 	hurtAnim()
+	if damage > 0:
+		wasHurt = true
 	if armor >= 0:
 		var newDamage = (damage - armor)
 		if newDamage >= armor:
@@ -49,7 +53,12 @@ func armorCheck():
 
 
 func showDescription():
-	gameManager.showplayerDescription(self)
+	var status_info = ""
+	if statusComponent:
+		status_info = statusComponent.get_status_description()
+		print("Player Status Info: ", status_info) # Debug check
+	
+	gameManager.showplayerDescription(self, status_info)
 
 func hideDescription():
 	gameManager.hideplayerDescription()
@@ -76,3 +85,22 @@ func emitBuff():
 	particles.emitting = true
 	await get_tree().create_timer(.5).timeout
 	particles.emitting = false
+
+
+func start_turn():
+	print(Name, " starting turn processing...")
+	if statusComponent:
+		# YOU MUST AWAIT THIS CALL
+		await statusComponent.process_statuses()
+	
+	# Small extra safety gap
+	await get_tree().process_frame 
+	print(Name, " processing finished.")
+	
+
+func Feedback(targetPosition: Vector2, amount: int, type: String):
+	var offset :Vector2 = Vector2(-40, -90)
+	var feedback = preload("res://feedBack.tscn").instantiate()
+	feedback.showFeedback(amount, type)
+	feedback.global_position = targetPosition + offset
+	get_tree().current_scene.add_child(feedback)

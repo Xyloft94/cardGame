@@ -5,5 +5,6 @@ func _physics_process(delta):
 		APcost = 1
 
 func play(target):
+	caster.attackAnim()
 	damage(14, target)
 	discard()

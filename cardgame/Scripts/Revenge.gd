@@ -1,7 +1,8 @@
 extends "res://Scripts/Card.gd"
 
 func play(target):
-	if gameManager.warriorHurt:
+	caster.attackAnim()
+	if caster.wasHurt:
 		damage(8, target)
 	else:
 		damage(3, target)
