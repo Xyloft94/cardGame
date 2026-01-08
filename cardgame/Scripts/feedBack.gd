@@ -24,5 +24,9 @@ func showFeedback(number: int, type: String):
 		"buff":
 			label.modulate = Color.RED
 			Arrow.visible = true
+		"draw":
+			label.modulate = Color.WHITE
+			Arrow.visible = true
+			
 			
 	animPlayer.play("fade")

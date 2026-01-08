@@ -1,11 +1,11 @@
 [gd_scene load_steps=25 format=3 uid="uid://dw02evcbdf5p5"]
 
-[ext_resource type="Script" path="res://wizard.gd" id="1_bfwv4"]
-[ext_resource type="Texture2D" uid="uid://1ksfyhesgey8" path="res://Art/Wizard-Recovered-sheet.png" id="2_dnnyv"]
+[ext_resource type="Script" path="res://Scripts/wizard.gd" id="1_bfwv4"]
+[ext_resource type="Texture2D" uid="uid://1ksfyhesgey8" path="res://Art/Wizard.png" id="2_dnnyv"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_8icgt"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_jsxca"]
 [ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_yfkdd"]
-[ext_resource type="PackedScene" uid="uid://ccdvbdhacvgq4" path="res://hand_component.tscn" id="6_4s4np"]
+[ext_resource type="PackedScene" uid="uid://ccdvbdhacvgq4" path="res://Components/hand_component.tscn" id="6_4s4np"]
 [ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="7_8tdf5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwffa"]
@@ -177,7 +177,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Wizard" type="CharacterBody2D" node_paths=PackedStringArray("handComponent", "animTree", "particles", "statusComponent") groups=["Player", "Warrior"]]
 script = ExtResource("1_bfwv4")
-health = 7
+health = 100
 Name = "Wizard"
 AP = 3
 intelligence = 6

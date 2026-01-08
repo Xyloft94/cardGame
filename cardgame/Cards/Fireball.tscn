@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpa1cim15jt44"]
+
+[ext_resource type="Script" path="res://fireball.gd" id="1_76tt8"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_8ilpg"]
+[ext_resource type="Texture2D" uid="uid://df51d2od4o5ht" path="res://Art/cardArt/fireBall.png" id="2_v0pyh"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="4_xooym"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="5_k1l60"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j15qq"]
+size = Vector2(32, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wt04"]
+size = Vector2(51, 82)
+
+[node name="Fireball" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
+script = ExtResource("1_76tt8")
+APcost = 2
+Description = "Deal 6 Damage to target + Neighbor"
+Highlight = NodePath("Highlight")
+Sprite = NodePath("Sprite2D")
+
+[node name="Highlight" parent="." instance=ExtResource("2_8ilpg")]
+offset_left = -30.0
+offset_top = -47.0
+offset_right = 37.0
+offset_bottom = 51.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_v0pyh")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_xooym")]
+scale = Vector2(1.5, 1.5)
+card = true
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="clickBox" index="0"]
+position = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_j15qq")
+
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("5_k1l60")]
+parent = NodePath("..")
+card = true
+
+[node name="CollisionShape2D" parent="hoverBox" index="0"]
+position = Vector2(3.5, 2)
+shape = SubResource("RectangleShape2D_4wt04")
+
+[editable path="clickBox"]
+[editable path="hoverBox"]

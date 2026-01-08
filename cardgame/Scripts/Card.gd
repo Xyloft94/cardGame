@@ -9,25 +9,42 @@ var caster :Node2D
 
 
 func get_group(type: String, main_target: Node = null) -> Array:
+	var team = gameManager.enemyTeam if main_target in gameManager.enemyTeam else gameManager.playerTeam
+	var idx = team.find(main_target)
+	
+	# DEBUG PRINTS - Watch these in your console!
+	print("--- Group Calculation Start ---")
+	print("Target: ", main_target.name, " at Index: ", idx)
+	print("Mode: ", type)
+	print("Current Team Size: ", team.size())
+
+	var targets : Array = []
+
 	match type:
-		"single": return [main_target]
-		"all_enemies": return gameManager.enemyTeam.duplicate()
-		"all_players": return gameManager.playerTeam.duplicate()
+		"single":
+			targets = [main_target]
 		"neighbors": 
-			var team = gameManager.enemyTeam if main_target in gameManager.enemyTeam else gameManager.playerTeam
-			var idx = team.find(main_target)
-			var targets = [main_target]
-			if idx > 0: targets.append(team[idx - 1])
-			if idx < team.size() - 1: targets.append(team[idx + 1])
+			targets = [main_target]
+			
+			# 1. Try to splash RIGHT first (Index + 1)
+			if idx < team.size() - 1: 
+				targets.append(team[idx + 1])
+			
+			# 2. If we ARE the last person, splash LEFT instead (Index - 1)
+			elif idx > 0: 
+				targets.append(team[idx - 1])
+			
+			# 3. EXIT NOW so we never touch "line" or add a 3rd target
 			return targets
 		"line":
-			var team = gameManager.enemyTeam
-			var idx = team.find(main_target)
-			var targets = [main_target]
-			if idx != -1 and idx + 2 < team.size():
+			targets.append(main_target)
+			if idx + 2 < team.size():
 				targets.append(team[idx + 2])
-			return targets
-	return []
+				print("Added Line Target: ", team[idx+2].name)
+	
+	print("Final Target List: ", targets.map(func(t): return t.name))
+	print("--- Group Calculation End ---")
+	return targets
 
 func apply_to_group(targets: Array, effect_callable: Callable):
 	for t in targets:
@@ -116,3 +133,8 @@ func apply_debuff(effect_name: String, power: int, duration: int, target: Node):
 		})
 		target.hitAnim() 
 		Feedback(target.global_position, power, effect_name)
+		
+func drawCards(amount:int, target:Node2D):
+	for i in amount:
+		target.handComponent.drawCard()
+		Feedback(target.global_position, amount, "armor")

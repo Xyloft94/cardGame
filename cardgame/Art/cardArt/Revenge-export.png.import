@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfr3jag0mq1rw"
-path="res://.godot/imported/Shield_Warrior-export.png-4c1eab9840a01d0f662758dc825097a0.ctex"
+uid="uid://bo7iw0kr8h33"
+path="res://.godot/imported/Revenge-export.png-2082e1676387a295cdb91170bb6bba0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Shield_Warrior-export.png"
-dest_files=["res://.godot/imported/Shield_Warrior-export.png-4c1eab9840a01d0f662758dc825097a0.ctex"]
+source_file="res://Art/cardArt/Revenge-export.png"
+dest_files=["res://.godot/imported/Revenge-export.png-2082e1676387a295cdb91170bb6bba0e.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bg0xa36nq8dwx"]
 
 [ext_resource type="Script" path="res://Scripts/Node2D.gd" id="1_4acur"]
-[ext_resource type="Texture2D" uid="uid://c2mxjouh45u4t" path="res://Art/Brace_Warrior-export.png" id="2_8twwu"]
-[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Highlight.tscn" id="2_isoye"]
+[ext_resource type="Texture2D" uid="uid://c2mxjouh45u4t" path="res://Art/cardArt/Brace_Warrior-export.png" id="2_8twwu"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_isoye"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_c5g1g"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_tqv5d"]
 

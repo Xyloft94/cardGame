@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2mxjouh45u4t"
-path="res://.godot/imported/Brace_Warrior-export.png-f7f33a570f438f9aaa741d1418f174fc.ctex"
+uid="uid://b7ha5e6bff7x1"
+path="res://.godot/imported/ignite.png-54c3d450cb1063d769dc4a34a68784cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Brace_Warrior-export.png"
-dest_files=["res://.godot/imported/Brace_Warrior-export.png-f7f33a570f438f9aaa741d1418f174fc.ctex"]
+source_file="res://Art/cardArt/ignite.png"
+dest_files=["res://.godot/imported/ignite.png-54c3d450cb1063d769dc4a34a68784cf.ctex"]
 
 [params]
 

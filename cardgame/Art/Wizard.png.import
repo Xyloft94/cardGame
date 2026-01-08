@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdqhqy0q8um8y"
-path="res://.godot/imported/Minotaur.png-8c79ad1e84cf61a04bec63355898d840.ctex"
+uid="uid://1ksfyhesgey8"
+path="res://.godot/imported/Wizard.png-b7987e5e7d5de512a94a55546bb930bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Minotaur.png"
-dest_files=["res://.godot/imported/Minotaur.png-8c79ad1e84cf61a04bec63355898d840.ctex"]
+source_file="res://Art/Wizard.png"
+dest_files=["res://.godot/imported/Wizard.png-b7987e5e7d5de512a94a55546bb930bc.ctex"]
 
 [params]
 

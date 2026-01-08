@@ -1,16 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://bfhfrca4pmlpb"]
 
 [ext_resource type="Script" path="res://Scripts/Shield.gd" id="1_fo4an"]
-[ext_resource type="Texture2D" uid="uid://dfr3jag0mq1rw" path="res://Art/Shield_Warrior-export.png" id="2_lirnx"]
-[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Highlight.tscn" id="2_qbjl1"]
+[ext_resource type="Texture2D" uid="uid://dfr3jag0mq1rw" path="res://Art/cardArt/Shield_Warrior-export.png" id="2_lirnx"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_qbjl1"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_vgqld"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_70mvq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sbeeb"]
-size = Vector2(39, 60)
+size = Vector2(35.3333, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltkwy"]
-size = Vector2(38, 58.6667)
+size = Vector2(35.3333, 54)
 
 [node name="Shield" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
 scale = Vector2(1.5, 1.5)
@@ -30,7 +30,7 @@ card = true
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="clickBox" index="0"]
-position = Vector2(3.5, 1)
+position = Vector2(2.33333, 0.333333)
 shape = SubResource("RectangleShape2D_sbeeb")
 
 [node name="cardBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_70mvq")]
@@ -38,7 +38,7 @@ parent = NodePath("..")
 card = true
 
 [node name="CollisionShape2D" parent="cardBox" index="0"]
-position = Vector2(2.33333, 1.33333)
+position = Vector2(2.33333, 0.333333)
 shape = SubResource("RectangleShape2D_ltkwy")
 
 [editable path="clickBox"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dq1lqeor34vy0"]
+
+[ext_resource type="Script" path="res://Cards/mana_shield.gd" id="1_ocus4"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="1_px7mh"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_1cvbo"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="3_2thee"]
+[ext_resource type="Texture2D" uid="uid://bwxsmf1bnk2id" path="res://Art/cardArt/manaShield.png" id="4_ndb6g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h38aw"]
+size = Vector2(49, 76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvyjf"]
+size = Vector2(48, 77)
+
+[node name="manaShield" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
+script = ExtResource("1_ocus4")
+APcost = 1
+Description = "Gain 6 Armor"
+Highlight = NodePath("Highlight")
+Sprite = NodePath("Sprite2D")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("1_px7mh")]
+card = true
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="clickBox" index="0"]
+position = Vector2(3.5, 2)
+shape = SubResource("RectangleShape2D_h38aw")
+
+[node name="Highlight" parent="." instance=ExtResource("2_1cvbo")]
+offset_left = -30.0
+offset_top = -47.0
+offset_right = 38.0
+offset_bottom = 51.0
+
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_2thee")]
+parent = NodePath("..")
+card = true
+
+[node name="CollisionShape2D" parent="hoverBox" index="0"]
+position = Vector2(4, 1.5)
+shape = SubResource("RectangleShape2D_pvyjf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_ndb6g")
+
+[editable path="clickBox"]
+[editable path="hoverBox"]

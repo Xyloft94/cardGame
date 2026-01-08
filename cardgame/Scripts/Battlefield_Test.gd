@@ -42,15 +42,26 @@ func spawnPlayers():
 	#gameManager.setAP()
 
 func spawnEnemies():
+	# 1. Clear the list completely before starting
 	gameManager.enemyTeam.clear()
+	
 	var markers = enemySlots.get_children()
-	for i in range(Enemies.size()):
+	
+	# 2. Only spawn as many enemies as you have MARKERS for
+	# This prevents "ghost" enemies from being added to the logic array
+	var spawn_count = min(Enemies.size(), markers.size())
+	
+	for i in range(spawn_count):
+		if Enemies[i] == null: continue # Safety check for empty export slots
+		
 		var newEnemy = Enemies[i].instantiate()
-		var targetMarker = markers[i]
-		targetMarker.add_child(newEnemy)
+		markers[i].add_child(newEnemy)
+		
+		# 3. Add to the team array
 		gameManager.enemyTeam.append(newEnemy)
+		
+		# Assign targets
 		if gameManager.playerTeam.size() > 0:
 			newEnemy.Player = gameManager.playerTeam[0]
-		#newEnemy.Player = gameManager.Player
-	print(gameManager.enemyTeam.size(), "This is how many enemies there are")
+	print("Final Enemy Team Size: ", gameManager.enemyTeam.size())
 	

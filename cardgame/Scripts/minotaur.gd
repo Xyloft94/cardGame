@@ -16,6 +16,10 @@ func _ready():
 
 		# MOVE 3: Fire Breath (Burn all players)
 		func(): 
-			await action_dot("all_players", "Burn", 3, 2)
+			await action_dot("all_players", "Burn", 3, 2),
+
+
+		func():
+			await dealDamage(5, select_target())
 	]
 	

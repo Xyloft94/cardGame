@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_o4ctm"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_26rxv"]
 [ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_i5toq"]
-[ext_resource type="PackedScene" uid="uid://ccdvbdhacvgq4" path="res://hand_component.tscn" id="6_6f8o8"]
+[ext_resource type="PackedScene" uid="uid://ccdvbdhacvgq4" path="res://Components/hand_component.tscn" id="6_6f8o8"]
 [ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="7_ush4x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fwffa"]

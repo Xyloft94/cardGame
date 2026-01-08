@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4x8csmfrmnh4"
-path="res://.godot/imported/Slice_Warrior-export.png-f459e3699d81d389db183bade777193e.ctex"
+uid="uid://dfr3jag0mq1rw"
+path="res://.godot/imported/Shield_Warrior-export.png-33a7cc23c02d88055d0a9e346750a2cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Slice_Warrior-export.png"
-dest_files=["res://.godot/imported/Slice_Warrior-export.png-f459e3699d81d389db183bade777193e.ctex"]
+source_file="res://Art/cardArt/Shield_Warrior-export.png"
+dest_files=["res://.godot/imported/Shield_Warrior-export.png-33a7cc23c02d88055d0a9e346750a2cc.ctex"]
 
 [params]
 

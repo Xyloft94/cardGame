@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1ksfyhesgey8"
-path="res://.godot/imported/Wizard-Recovered-sheet.png-36d82d792211f8c55afebfaa8e0a0179.ctex"
+uid="uid://cfeto25uf16og"
+path="res://.godot/imported/Rage_Warrior-export.png-71b43bd2ab18aa4fff92c60896d8e67a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Wizard-Recovered-sheet.png"
-dest_files=["res://.godot/imported/Wizard-Recovered-sheet.png-36d82d792211f8c55afebfaa8e0a0179.ctex"]
+source_file="res://Art/cardArt/Rage_Warrior-export.png"
+dest_files=["res://.godot/imported/Rage_Warrior-export.png-71b43bd2ab18aa4fff92c60896d8e67a.ctex"]
 
 [params]
 

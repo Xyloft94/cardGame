@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqyse7tlupub7"]
+
+[ext_resource type="Texture2D" uid="uid://dquh6tiddi0io" path="res://Art/cardArt/disintegrate.png" id="1_aq614"]
+[ext_resource type="Script" path="res://Scripts/disintegrate.gd" id="1_dkdbw"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="2_3gd8o"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_j234j"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="3_kxnvb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0pvf"]
+size = Vector2(51, 76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxc05"]
+size = Vector2(49, 76)
+
+[node name="Disintegrate" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
+script = ExtResource("1_dkdbw")
+APcost = 3
+Description = "Deals 20 Damage"
+Highlight = NodePath("Highlight")
+Sprite = NodePath("Sprite2D")
+
+[node name="Highlight" parent="." instance=ExtResource("2_j234j")]
+offset_left = -30.0
+offset_top = -48.0
+offset_right = 38.0
+offset_bottom = 51.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_aq614")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_3gd8o")]
+card = true
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="clickBox" index="0"]
+position = Vector2(3.5, 1)
+shape = SubResource("RectangleShape2D_o0pvf")
+
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_kxnvb")]
+parent = NodePath("..")
+card = true
+
+[node name="CollisionShape2D" parent="hoverBox" index="0"]
+position = Vector2(4, 1)
+shape = SubResource("RectangleShape2D_wxc05")
+
+[editable path="clickBox"]
+[editable path="hoverBox"]

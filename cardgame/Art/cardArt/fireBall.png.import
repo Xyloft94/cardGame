@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwhgwcvnp7apn"
-path="res://.godot/imported/crushingBlow-export.png-3f9d07e5e556d721b33c139787e76877.ctex"
+uid="uid://df51d2od4o5ht"
+path="res://.godot/imported/fireBall.png-531d2a45ff1d5c38b7686ffe789b4c6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/crushingBlow-export.png"
-dest_files=["res://.godot/imported/crushingBlow-export.png-3f9d07e5e556d721b33c139787e76877.ctex"]
+source_file="res://Art/cardArt/fireBall.png"
+dest_files=["res://.godot/imported/fireBall.png-531d2a45ff1d5c38b7686ffe789b4c6e.ctex"]
 
 [params]
 

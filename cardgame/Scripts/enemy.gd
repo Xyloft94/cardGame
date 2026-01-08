@@ -85,6 +85,8 @@ func takeDamage(damage: int):
 	health -= damage
 	hitAnim() 
 	Feedback(self.global_position, damage, "damage")
+	if health <= 0:
+		die()
 
 func dealDamage(amount: int, target: Node = null):
 	var debuff_power = statusComponent.get_total_reduction()

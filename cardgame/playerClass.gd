@@ -34,7 +34,8 @@ func takeDamage(damage :int):
 			armor = (armor - damage)
 	else:
 		health -= damage
-		
+	if armor < 0:
+		armor = 0
 	EventBus.emit_signal("takenDamage", Name)
 		
 func temp_modifyDamage(baseDamage):
@@ -99,7 +100,7 @@ func start_turn():
 	
 
 func Feedback(targetPosition: Vector2, amount: int, type: String):
-	var offset :Vector2 = Vector2(-40, -90)
+	var offset :Vector2 = Vector2(0, -90)
 	var feedback = preload("res://feedBack.tscn").instantiate()
 	feedback.showFeedback(amount, type)
 	feedback.global_position = targetPosition + offset

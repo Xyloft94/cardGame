@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2shc372j1wer"]
+
+[ext_resource type="Script" path="res://ignite.gd" id="1_31x8u"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_6i25m"]
+[ext_resource type="Texture2D" uid="uid://b7ha5e6bff7x1" path="res://Art/cardArt/ignite.png" id="3_2i3n0"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="4_3lbv7"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="5_fex6r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1j31"]
+size = Vector2(49, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f30rk"]
+size = Vector2(45, 79)
+
+[node name="Ignite" type="Node2D" node_paths=PackedStringArray("Highlight", "Sprite")]
+script = ExtResource("1_31x8u")
+APcost = 1
+Description = "Deal 4 Damage, 2 Burn(2)"
+Highlight = NodePath("Highlight")
+Sprite = NodePath("Sprite2D")
+
+[node name="Highlight" parent="." instance=ExtResource("2_6i25m")]
+offset_left = -32.0
+offset_top = -48.0
+offset_right = 39.0
+offset_bottom = 53.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_2i3n0")
+
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_3lbv7")]
+card = true
+parent = NodePath("..")
+
+[node name="CollisionShape2D" parent="clickBox" index="0"]
+position = Vector2(3.5, 3.5)
+shape = SubResource("RectangleShape2D_b1j31")
+
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("5_fex6r")]
+parent = NodePath("..")
+card = true
+
+[node name="CollisionShape2D" parent="hoverBox" index="0"]
+position = Vector2(2.5, 3.5)
+shape = SubResource("RectangleShape2D_f30rk")
+
+[editable path="clickBox"]
+[editable path="hoverBox"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://c8na1utjf2iwk"]
 
 [ext_resource type="Script" path="res://Scripts/Crushing_Blow.gd" id="1_bd6i0"]
-[ext_resource type="Texture2D" uid="uid://bwhgwcvnp7apn" path="res://Art/crushingBlow-export.png" id="2_0vvey"]
-[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Highlight.tscn" id="2_400av"]
+[ext_resource type="Texture2D" uid="uid://bwhgwcvnp7apn" path="res://Art/cardArt/crushingBlow-export.png" id="2_0vvey"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_400av"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_n2nli"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_cdxdi"]
 

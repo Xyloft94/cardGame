@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo7iw0kr8h33"
-path="res://.godot/imported/Revenge-export.png-6cb00398c62300076b851e1444c15306.ctex"
+uid="uid://bwhgwcvnp7apn"
+path="res://.godot/imported/crushingBlow-export.png-144c6d721099a827f8e12ab8693dc66f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Revenge-export.png"
-dest_files=["res://.godot/imported/Revenge-export.png-6cb00398c62300076b851e1444c15306.ctex"]
+source_file="res://Art/cardArt/crushingBlow-export.png"
+dest_files=["res://.godot/imported/crushingBlow-export.png-144c6d721099a827f8e12ab8693dc66f.ctex"]
 
 [params]
 

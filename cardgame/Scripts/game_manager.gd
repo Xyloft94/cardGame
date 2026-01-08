@@ -8,7 +8,6 @@ var modAP: int
 var warriorHurt: bool 
 var wizardHurt: bool
 var currentTurn = TurnOrder.PLAYER
-#var Player = get_tree().get_first_node_in_group("Player")
 var battleUI :CanvasLayer = null
 var cardClicked :bool = false
 var playerTeam: Array = []
@@ -24,12 +23,9 @@ func _ready():
 	var warriorScene = load("res://Warrior.tscn")
 	var wizardScene = load("res://Wizard.tscn")
 	Player1 = warriorScene.instantiate()
-	Player2 = warriorScene.instantiate()
-	
-	# YOU MUST ADD THEM TO THE SCENE
+	Player2 = wizardScene.instantiate()
 	add_child(Player1)
 	add_child(Player2)
-	
 	playerTeam.append(Player1)
 	playerTeam.append(Player2)
 	activePlayer = Player1
@@ -72,19 +68,18 @@ func selectedTarget(target: Node):
 func playerTurn():
 	resetAP()
 	modAP = 0
-	
-	# 1. Trigger everything instantly
 	for member in playerTeam:
 		if is_instance_valid(member):
 			if member.has_method("start_turn"):
-				member.start_turn() # No await here
-			member.handComponent.reDraw()
+				await member.start_turn() 
+			if member.handComponent:
+				member.handComponent.reDraw()
+			await get_tree().process_frame
 	
-	# 2. Arrange the UI
+
 	battleUI.handUI.arrangeHand()
 	
-	# 3. One single wait so the player can see any DOT damage that just happened
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	print("Player Turn Ready")
 
 func enemyTurn():
@@ -122,16 +117,11 @@ func setAP():
 	totalAP = teamTotal
 
 func resetAP():
-	# 1. Calculate the team's total AP capacity
 	var teamTotal = 0
 	for member in playerTeam:
 		if is_instance_valid(member):
-			teamTotal += member.AP # Assumes your Warrior script has a 'var AP'
-	
-	# 2. Add any bonus AP from the previous turn (modAP)
+			teamTotal += member.AP
 	totalAP = teamTotal + modAP
-	
-	# 3. Update the UI label
 	if battleUI and battleUI.apLabel:
 		battleUI.apLabel.text = ("AP: " + str(totalAP))
 	
@@ -154,12 +144,7 @@ func showenemyDescription(enemy: CharacterBody2D, status_text: String = ""):
 	battleUI.enemyName.text = enemy.Name
 	battleUI.enemyHealth.text = ("Health: " + str(enemy.health))
 	battleUI.enemyArmor.text = ("Armor: " + str(enemy.armor))
-	
-	# This label now ONLY handles the modifiedDamage buff
 	battleUI.enemyBuffs.text = ("Attack + " + str(enemy.modifiedDamage))
-	
-	# Use your dedicated Status label at the bottom of the VBox
-	# Note: Replace 'StatusLabel' with the exact name of your node in battleUI
 	if status_text != "":
 		battleUI.enemyStatus.text = status_text
 		battleUI.enemyStatus.visible = true
@@ -176,15 +161,9 @@ func showplayerDescription(player: Player, status_text: String = ""):
 	battleUI.playerHealth.text = ("Health: " + str(player.health))
 	battleUI.playerArmor.text = ("Armor: " + str(player.armor))
 	battleUI.playerBuffs.text = ("Attack + " + str(player.temp_modDamage))
-	
-	# Instead of has_node, use a direct reference if you set it up in battleUI
-	# Or, if playerStatus is a child of PlayerDescription:
 	var label = battleUI.playerStatus
 	
 	if label:
-		# If status_text is empty, we show nothing. 
-		# If it has text, we update the label.
-		label.text = status_text
 		label.visible = (status_text != "")
 	else:
 		print("UI Warning: Could not find 'playerStatus' label in PlayerDescription panel")
@@ -195,17 +174,27 @@ func hideplayerDescription():
 func setActivePlayer(newPlayer: Player):
 	if activePlayer == newPlayer: 
 		return
+	
 	if activePlayer != null:
 		var cards_to_move = battleUI.handUI.get_children()
 		for card in cards_to_move:
 			battleUI.handUI.remove_child(card)
 			activePlayer.handComponent.add_child(card)
 			card.visible = false
+	
 	activePlayer = newPlayer
+	
 	for card in activePlayer.handComponent.get_children():
 		if card is Card: 
 			activePlayer.handComponent.remove_child(card)
 			battleUI.handUI.add_child(card)
 			card.visible = true
+			
+			# --- THE FIX ---
+			# Set them to (0,0) relative to the HandUI center.
+			# Now, arrangeHand() will push them OUT from the middle 
+			# exactly like it does during the initial draw.
+			card.position = Vector2.ZERO 
+	
 	battleUI.handUI.arrangeHand()
 	showplayerDescription(activePlayer)

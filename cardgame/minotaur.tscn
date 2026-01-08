@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://7tnastswnm1p"]
 
-[ext_resource type="Script" path="res://minotaur.gd" id="1_vpmwg"]
+[ext_resource type="Script" path="res://Scripts/minotaur.gd" id="1_vpmwg"]
 [ext_resource type="Texture2D" uid="uid://jq6noahrwslh" path="res://Art/animatedMinotaur.png" id="2_3o6j7"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_nxw0q"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_gfb6o"]

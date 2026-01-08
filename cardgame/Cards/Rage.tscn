@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cwyexamifo8qe"]
 
 [ext_resource type="Script" path="res://Scripts/Rage.gd" id="1_bb5n2"]
-[ext_resource type="Texture2D" uid="uid://cfeto25uf16og" path="res://Art/Rage_Warrior-export.png" id="2_0jil2"]
-[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Highlight.tscn" id="2_qxvua"]
+[ext_resource type="Texture2D" uid="uid://cfeto25uf16og" path="res://Art/cardArt/Rage_Warrior-export.png" id="2_0jil2"]
+[ext_resource type="PackedScene" uid="uid://b78cretiwm85u" path="res://Components/Highlight.tscn" id="2_qxvua"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_hqdse"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_o8w6o"]
 
