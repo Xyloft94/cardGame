@@ -104,6 +104,7 @@ func dealDamage(amount: int, target: Node = null):
 	modifiedDamage = 0
 
 func buffDamage(amount: int):
+	buffAnim()
 	modifiedDamage += amount
 	emitBuff()
 	Feedback(self.global_position, amount, "buff")
@@ -137,6 +138,12 @@ func showDescription():
 
 func hideDescription():
 	gameManager.hideenemyDescription()
+
+func buffAnim():
+	animTree.set("parameters/conditions/Buff", true)
+	print(self.name, "should be moving")
+	await get_tree().create_timer(.8).timeout
+	animTree.set("parameters/conditions/Buff", false)
 
 func attackAnim():
 	animTree.set("parameters/conditions/Attack", true)
@@ -186,12 +193,16 @@ func action_attack(target_type: String, damage_value: int):
 	modifiedDamage = 0
 
 func action_buff(target_type: String, amount: int):
+	buffAnim()
+	await get_tree().create_timer(.8).timeout
 	emitBuff()
 	var targets = get_group(target_type)
 	for t in targets:
 		if t.has_method("buffDamage"):
 			t.buffDamage(amount)
 func action_heal(target_type: String, amount: int):
+	buffAnim()
+	await get_tree().create_timer(.8).timeout
 	emitHealth()
 	var targets = get_group(target_type)
 	for t in targets:

@@ -87,8 +87,7 @@ func enemyTurn():
 	for currentEnemy in enemyTeam.duplicate():
 		if is_instance_valid(currentEnemy):
 			currentEnemy.Attack()
-			await get_tree().create_timer(currentEnemy.attackLength + 0.8).timeout
-	await get_tree().create_timer(1).timeout
+			await get_tree().create_timer(currentEnemy.attackLength + 1).timeout
 	endEnemyTurn()
 
 func endPlayerTurn():

@@ -11,7 +11,7 @@ func _ready():
 		# MOVE 2: Roar (Buffs team and Heals self)
 		func():
 			await action_buff("all_enemies", 2)
-			await get_tree().create_timer(.5).timeout
+			await get_tree().create_timer(.1).timeout
 			await action_heal("self", 10),
 
 		# MOVE 3: Fire Breath (Burn all players)

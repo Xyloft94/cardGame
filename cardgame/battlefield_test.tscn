@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxmkaulx2yip8"]
+[gd_scene load_steps=6 format=3 uid="uid://dxmkaulx2yip8"]
 
 [ext_resource type="Script" path="res://Scripts/Battlefield_Test.gd" id="1_2gno3"]
 [ext_resource type="PackedScene" uid="uid://7tnastswnm1p" path="res://minotaur.tscn" id="2_00ruy"]
 [ext_resource type="PackedScene" uid="uid://q75760mcnusx" path="res://battleUI.tscn" id="3_sb7he"]
 [ext_resource type="PackedScene" uid="uid://1p1nehy4edb8" path="res://handUI.tscn" id="4_phqva"]
+[ext_resource type="PackedScene" uid="uid://cpcar3pu4fsgx" path="res://smallWarriorGoblin.tscn" id="7_u5rn5"]
 
 [node name="Battlefield_Test" type="Node2D" node_paths=PackedStringArray("enemySlots", "playerSlots", "handUI")]
 script = ExtResource("1_2gno3")
 enemy1 = ExtResource("2_00ruy")
 enemy2 = ExtResource("2_00ruy")
-enemy3 = ExtResource("2_00ruy")
-enemy4 = ExtResource("2_00ruy")
+enemy3 = ExtResource("7_u5rn5")
+enemy4 = ExtResource("7_u5rn5")
 enemySlots = NodePath("enemySlots")
 playerSlots = NodePath("playerSlots")
 handUI = NodePath("handUI")

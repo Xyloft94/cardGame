@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jq6noahrwslh"
-path="res://.godot/imported/animatedMinotaur.png-5f9ad2410e1cfb90f4b21f0973382f55.ctex"
+path="res://.godot/imported/animatedMinotaur.png-432a2ee4e49cf0baa69ca65120c54a90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/animatedMinotaur.png"
-dest_files=["res://.godot/imported/animatedMinotaur.png-5f9ad2410e1cfb90f4b21f0973382f55.ctex"]
+source_file="res://Art/enemyArt/animatedMinotaur.png"
+dest_files=["res://.godot/imported/animatedMinotaur.png-432a2ee4e49cf0baa69ca65120c54a90.ctex"]
 
 [params]
 

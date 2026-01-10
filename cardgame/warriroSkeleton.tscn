@@ -1,11 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://7tnastswnm1p"]
+[gd_scene load_steps=31 format=3 uid="uid://cug2xvy15j4de"]
 
-[ext_resource type="Script" path="res://Scripts/minotaur.gd" id="1_vpmwg"]
-[ext_resource type="Texture2D" uid="uid://jq6noahrwslh" path="res://Art/enemyArt/animatedMinotaur.png" id="2_3o6j7"]
-[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_nxw0q"]
-[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_gfb6o"]
-[ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_rmwm8"]
-[ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="6_s8rl3"]
+[ext_resource type="Script" path="res://Scripts/minotaur.gd" id="1_hngsj"]
+[ext_resource type="Texture2D" uid="uid://bi8tux3fg5ycj" path="res://Art/enemyArt/skeletonWarrior.png" id="2_l5sjo"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_gwnff"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_fn45u"]
+[ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_ydbr4"]
+[ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="6_hsvlj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ng7kb"]
 size = Vector2(26, 28)
@@ -360,31 +360,23 @@ states/Idle/node = SubResource("AnimationNodeAnimation_txusc")
 states/Idle/position = Vector2(467, 76)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by8tx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lohhv"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_pumay"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_bt4rw"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_5a6or"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_3m2vi"), "Idle", "Buff", SubResource("AnimationNodeStateMachineTransition_d0uus"), "Buff", "Idle", SubResource("AnimationNodeStateMachineTransition_glcsf")]
 
-[node name="Minotaur" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "particles", "statusComponent")]
+[node name="skeletonWarrior" type="CharacterBody2D"]
 modulate = Color(1, 1, 1, 0.756863)
 scale = Vector2(4, 4)
-script = ExtResource("1_vpmwg")
-health = 10
-Name = "Minotaur"
-animTree = NodePath("AnimationTree")
-attackLength = 0.5
-hitLength = 0.25
-deathLength = 0.5
-particles = NodePath("GPUParticles2D")
-statusComponent = NodePath("statusComponent")
+script = ExtResource("1_hngsj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_3o6j7")
-hframes = 6
+texture = ExtResource("2_l5sjo")
+hframes = 5
 
-[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_nxw0q")]
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_gwnff")]
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="clickBox" index="0"]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_ng7kb")
 
-[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_gfb6o")]
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_fn45u")]
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="hoverBox" index="0"]
@@ -407,12 +399,12 @@ parameters/conditions/Buff = false
 parameters/conditions/Death = false
 parameters/conditions/Hit = false
 
-[node name="GPUParticles2D" parent="." instance=ExtResource("5_rmwm8")]
+[node name="GPUParticles2D" parent="." instance=ExtResource("5_ydbr4")]
 position = Vector2(0.25, 15)
 scale = Vector2(1, 1)
 emitting = false
 
-[node name="statusComponent" parent="." instance=ExtResource("6_s8rl3")]
+[node name="statusComponent" parent="." instance=ExtResource("6_hsvlj")]
 
 [editable path="clickBox"]
 [editable path="hoverBox"]
