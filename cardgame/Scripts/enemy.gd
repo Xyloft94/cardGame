@@ -35,6 +35,7 @@ func get_group(type: String, main_target: Node = null) -> Array:
 		"all_players": return gameManager.playerTeam.duplicate()
 		"all_enemies": return gameManager.enemyTeam.duplicate()
 		"self": return [self]
+		"target": return [main_target]
 		"neighbors":
 			var team = gameManager.playerTeam
 			var idx = team.find(main_target)
@@ -104,10 +105,15 @@ func dealDamage(amount: int, target: Node = null):
 	modifiedDamage = 0
 
 func buffDamage(amount: int):
-	buffAnim()
 	modifiedDamage += amount
 	emitBuff()
 	Feedback(self.global_position, amount, "buff")
+	gameManager.hideenemyDescription()
+
+func buffArmor(amount: int):
+	armor += amount
+	emitArmor()
+	Feedback(self.global_position, amount, "armor")
 	gameManager.hideenemyDescription()
 
 func heal(amount: int):
@@ -119,6 +125,7 @@ func heal(amount: int):
 # --- UI & ANIMATION ---
 
 func Feedback(targetPosition: Vector2, amount: int, type: String):
+	print("why no work")
 	var offset :Vector2 = Vector2(-40, -90)
 	var feedback = preload("res://feedBack.tscn").instantiate()
 	feedback.showFeedback(amount, type)
@@ -193,15 +200,22 @@ func action_attack(target_type: String, damage_value: int):
 	modifiedDamage = 0
 
 func action_buff(target_type: String, amount: int):
-	buffAnim()
 	await get_tree().create_timer(.8).timeout
 	emitBuff()
 	var targets = get_group(target_type)
 	for t in targets:
 		if t.has_method("buffDamage"):
 			t.buffDamage(amount)
+
+func action_armor(target_type: String, amount: int):
+	await get_tree().create_timer(.8).timeout
+	emitArmor()
+	var targets = get_group(target_type)
+	for t in targets:
+		if t.has_method("buffArmor"):
+			t.buffArmor(amount)
+
 func action_heal(target_type: String, amount: int):
-	buffAnim()
 	await get_tree().create_timer(.8).timeout
 	emitHealth()
 	var targets = get_group(target_type)

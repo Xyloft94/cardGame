@@ -16,6 +16,7 @@ var Player2: Player
 var enemyTeam: Array = []
 var canChooseCard: bool 
 var activePlayer: Player
+var isPlayerTurn: bool
 enum TurnOrder {PLAYER, ENEMY}
 
 
@@ -30,6 +31,7 @@ func _ready():
 	playerTeam.append(Player2)
 	activePlayer = Player1
 	canChooseCard = true
+	isPlayerTurn = true
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("declick") and not canChooseCard:
@@ -66,6 +68,7 @@ func selectedTarget(target: Node):
 		canChooseCard = true 
 
 func playerTurn():
+	isPlayerTurn = true
 	resetAP()
 	modAP = 0
 	for member in playerTeam:
@@ -83,6 +86,7 @@ func playerTurn():
 	print("Player Turn Ready")
 
 func enemyTurn():
+	isPlayerTurn = false
 	print("this is the enemy turn")
 	for currentEnemy in enemyTeam.duplicate():
 		if is_instance_valid(currentEnemy):

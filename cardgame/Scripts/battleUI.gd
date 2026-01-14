@@ -26,4 +26,5 @@ func _ready():
 
 
 func _on_button_pressed():
-	gameManager.endPlayerTurn()
+	if gameManager.isPlayerTurn:
+		gameManager.endPlayerTurn()

@@ -5,19 +5,21 @@ extends Node2D
 @export var enemy2: PackedScene
 @export var enemy3: PackedScene
 @export var enemy4: PackedScene
+@export var difficulty_value: int = 10
 #@export var player: PackedScene
 @export var enemySlots: Node2D
 @export var playerSlots: Node2D
 @export var handUI: Node2D
-@onready var Enemies = [enemy1, enemy2, enemy3, enemy4]
 
 
 
 func _ready():
 	gameManager.battleUI = $battleUI
 	spawnPlayers()
-	spawnEnemies()
-
+	
+	# NEW: Get dynamic enemies from library
+	var dynamic_enemies = enemyLibrary.get_encounter_scenes(difficulty_value)
+	spawnEnemies(dynamic_enemies)
 
 func spawnPlayers():
 	var markers = playerSlots.get_children()
@@ -41,27 +43,20 @@ func spawnPlayers():
 	#hand_comp.drawHand()
 	#gameManager.setAP()
 
-func spawnEnemies():
-	# 1. Clear the list completely before starting
+func spawnEnemies(scenes_to_spawn: Array[PackedScene]):
 	gameManager.enemyTeam.clear()
-	
 	var markers = enemySlots.get_children()
 	
-	# 2. Only spawn as many enemies as you have MARKERS for
-	# This prevents "ghost" enemies from being added to the logic array
-	var spawn_count = min(Enemies.size(), markers.size())
-	
-	for i in range(spawn_count):
-		if Enemies[i] == null: continue # Safety check for empty export slots
+	for i in range(scenes_to_spawn.size()):
+		if i >= markers.size(): break # Stop if we run out of markers
 		
-		var newEnemy = Enemies[i].instantiate()
+		var newEnemy = scenes_to_spawn[i].instantiate()
 		markers[i].add_child(newEnemy)
-		
-		# 3. Add to the team array
 		gameManager.enemyTeam.append(newEnemy)
 		
-		# Assign targets
-		if gameManager.playerTeam.size() > 0:
+		# Assign basic target
+		if not gameManager.playerTeam.is_empty():
 			newEnemy.Player = gameManager.playerTeam[0]
+
 	print("Final Enemy Team Size: ", gameManager.enemyTeam.size())
 	

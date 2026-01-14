@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://clan82xa3sa6p"]
 
-[ext_resource type="Script" path="res://Scripts/cardDescription.gd" id="1_2o4v0"]
+[ext_resource type="Script" path="res://Scripts/battleUI.gd" id="1_2o4v0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i6ygs"]
 font_size = 24

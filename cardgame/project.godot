@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 gameManager="*res://gameManager.tscn"
 EventBus="*res://Scripts/EventBus.gd"
+enemyLibrary="*res://Scripts/enemyLibrary.gd"
 
 [display]
 

@@ -1,11 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://cug2xvy15j4de"]
+[gd_scene load_steps=31 format=3 uid="uid://62quc3h62d6s"]
 
-[ext_resource type="Script" path="res://Scripts/minotaur.gd" id="1_hngsj"]
-[ext_resource type="Texture2D" uid="uid://bi8tux3fg5ycj" path="res://Art/enemyArt/skeletonWarrior.png" id="2_l5sjo"]
-[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_gwnff"]
-[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_fn45u"]
-[ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_ydbr4"]
-[ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="6_hsvlj"]
+[ext_resource type="Script" path="res://Scripts/enemyScripts/skelly_archer.gd" id="1_uqe1r"]
+[ext_resource type="Texture2D" uid="uid://dksc20b21f43y" path="res://Art/enemyArt/skellyArcher.png" id="2_o70hg"]
+[ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_vfuxh"]
+[ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_t3efl"]
+[ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_77idk"]
+[ext_resource type="PackedScene" uid="uid://741icddb4u2w" path="res://status_component.tscn" id="6_72ufn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ng7kb"]
 size = Vector2(26, 28)
@@ -360,23 +360,23 @@ states/Idle/node = SubResource("AnimationNodeAnimation_txusc")
 states/Idle/position = Vector2(467, 76)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by8tx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lohhv"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_pumay"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_bt4rw"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_5a6or"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_3m2vi"), "Idle", "Buff", SubResource("AnimationNodeStateMachineTransition_d0uus"), "Buff", "Idle", SubResource("AnimationNodeStateMachineTransition_glcsf")]
 
-[node name="skeletonWarrior" type="CharacterBody2D"]
+[node name="skellyArcher" type="CharacterBody2D"]
 modulate = Color(1, 1, 1, 0.756863)
 scale = Vector2(4, 4)
-script = ExtResource("1_hngsj")
+script = ExtResource("1_uqe1r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_l5sjo")
-hframes = 5
+texture = ExtResource("2_o70hg")
+hframes = 6
 
-[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_gwnff")]
+[node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_vfuxh")]
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="clickBox" index="0"]
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_ng7kb")
 
-[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_fn45u")]
+[node name="hoverBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("4_t3efl")]
 parent = NodePath("..")
 
 [node name="CollisionShape2D" parent="hoverBox" index="0"]
@@ -399,12 +399,12 @@ parameters/conditions/Buff = false
 parameters/conditions/Death = false
 parameters/conditions/Hit = false
 
-[node name="GPUParticles2D" parent="." instance=ExtResource("5_ydbr4")]
+[node name="GPUParticles2D" parent="." instance=ExtResource("5_77idk")]
 position = Vector2(0.25, 15)
 scale = Vector2(1, 1)
 emitting = false
 
-[node name="statusComponent" parent="." instance=ExtResource("6_hsvlj")]
+[node name="statusComponent" parent="." instance=ExtResource("6_72ufn")]
 
 [editable path="clickBox"]
 [editable path="hoverBox"]
