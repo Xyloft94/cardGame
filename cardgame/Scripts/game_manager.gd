@@ -18,7 +18,7 @@ var canChooseCard: bool
 var activePlayer: Player
 var isPlayerTurn: bool
 enum TurnOrder {PLAYER, ENEMY}
-
+var slotWeights: Array[int] = [60, 30, 10]
 
 func _ready():
 	var warriorScene = load("res://Warrior.tscn")
@@ -59,9 +59,12 @@ func deselectCard(card: Node):
 
 func selectedTarget(target: Node):
 	if chosenCard and chosenCard.APcost <= totalAP: 
-		chosenCard.play(target.parent)
-		totalAP = (totalAP - chosenCard.APcost)
-		chosenCard.Highlight.visible = false
+		canChooseCard = false
+		var cardtoPlay = chosenCard
+		chosenCard = null
+		cardtoPlay.play(target.parent)
+		totalAP = (totalAP - cardtoPlay.APcost)
+		cardtoPlay.Highlight.visible = false
 		battleUI.apLabel.text = ("AP: " + str(totalAP))
 		cardClicked = false
 		hideCardDescription()

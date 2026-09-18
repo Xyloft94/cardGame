@@ -45,12 +45,39 @@ func get_group(type: String, main_target: Node = null) -> Array:
 			return targets
 	return [main_target]
 
-# FIX: Changed return type to 'Node' to prevent the "Invalid Assignment" conflict with the Player class
 func select_target() -> Node:
-	var valid_targets = gameManager.playerTeam.filter(func(p): return is_instance_valid(p))
-	if valid_targets.is_empty():
+	var valid_entries: Array = []
+	var total_weight: int = 0
+
+	# Loop through the players based on their current slot index
+	for i in range(gameManager.playerTeam.size()):
+		var player = gameManager.playerTeam[i]
+		if is_instance_valid(player):
+			# Get the weight for this slot (falls back to 10 if index exceeds slot_weights)
+			var weight = gameManager.slotWeights[i] if i < gameManager.slotWeights.size() else 10
+			valid_entries.append({"player": player, "weight": weight})
+			total_weight += weight
+
+	# Return null if all players are dead/invalid
+	if valid_entries.is_empty():
 		return null
-	return valid_targets.pick_random()
+
+	# Roll a random number within the active weight sum
+	var roll = randi_range(1, total_weight)
+	var current_sum: int = 0
+
+	for entry in valid_entries:
+		current_sum += entry["weight"]
+		if roll <= current_sum:
+			return entry["player"]
+
+	return valid_entries[0]["player"]
+	
+	#OLD TARGETING.
+	#var valid_targets = gameManager.playerTeam.filter(func(p): return is_instance_valid(p))
+	#if valid_targets.is_empty():
+		#return null
+	#return valid_targets.pick_random()
 
 # --- CORE LOGIC ---
 

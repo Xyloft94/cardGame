@@ -360,10 +360,18 @@ states/Idle/node = SubResource("AnimationNodeAnimation_txusc")
 states/Idle/position = Vector2(467, 76)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by8tx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lohhv"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_pumay"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_bt4rw"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_5a6or"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_3m2vi"), "Idle", "Buff", SubResource("AnimationNodeStateMachineTransition_d0uus"), "Buff", "Idle", SubResource("AnimationNodeStateMachineTransition_glcsf")]
 
-[node name="smallArcherGoblin" type="CharacterBody2D"]
+[node name="smallArcherGoblin" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "particles", "statusComponent")]
 modulate = Color(1, 1, 1, 0.756863)
 scale = Vector2(4, 4)
 script = ExtResource("1_t4b1m")
+health = 15
+Name = "small Archer"
+animTree = NodePath("AnimationTree")
+attackLength = 0.5
+hitLength = 0.25
+deathLength = 0.5
+particles = NodePath("GPUParticles2D")
+statusComponent = NodePath("statusComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_kqh3a")

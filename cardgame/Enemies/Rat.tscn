@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://dkrbj1j4pqhcd"]
 
 [ext_resource type="Script" path="res://Scripts/enemyScripts/rat.gd" id="1_sxht8"]
-[ext_resource type="Texture2D" uid="uid://jq6noahrwslh" path="res://Art/enemyArt/animatedMinotaur.png" id="2_gumdy"]
+[ext_resource type="Texture2D" uid="uid://ctqu8rmcq741u" path="res://Art/enemyArt/Rat.png" id="2_ctp56"]
 [ext_resource type="PackedScene" uid="uid://ckf2srdid3krn" path="res://Components/click_box.tscn" id="3_6g8nb"]
 [ext_resource type="PackedScene" uid="uid://wyx11abynxo2" path="res://Components/hoverBox.tscn" id="4_bwbpl"]
 [ext_resource type="PackedScene" uid="uid://dqc13h728a3os" path="res://gpu_particles_2d.tscn" id="5_8c3ou"]
@@ -360,13 +360,21 @@ states/Idle/node = SubResource("AnimationNodeAnimation_txusc")
 states/Idle/position = Vector2(467, 76)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_by8tx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_lohhv"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_pumay"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_bt4rw"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_5a6or"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_3m2vi"), "Idle", "Buff", SubResource("AnimationNodeStateMachineTransition_d0uus"), "Buff", "Idle", SubResource("AnimationNodeStateMachineTransition_glcsf")]
 
-[node name="Rat" type="CharacterBody2D"]
+[node name="Rat" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "particles", "statusComponent")]
 modulate = Color(1, 1, 1, 0.756863)
 scale = Vector2(4, 4)
 script = ExtResource("1_sxht8")
+health = 8
+Name = "Rat"
+animTree = NodePath("AnimationTree")
+attackLength = 0.5
+hitLength = 0.25
+deathLength = 0.5
+particles = NodePath("GPUParticles2D")
+statusComponent = NodePath("statusComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_gumdy")
+texture = ExtResource("2_ctp56")
 hframes = 6
 
 [node name="clickBox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_6g8nb")]

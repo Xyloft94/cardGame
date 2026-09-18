@@ -7,5 +7,7 @@ func _ready() -> void:
 			await dealDamage(4, select_target()),
 		func():
 			buffAnim()
-			await buffDamage(4)
+			await buffDamage(4),
+		func():
+			await dealDamage(4, select_target()),
 	]
