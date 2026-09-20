@@ -72,15 +72,25 @@ func get_encounter_scenes(budget: int) -> Array[PackedScene]:
 	for i in range(4):
 		enemyNames.shuffle()
 		var foundEnemy = false
+		
 		for name in enemyNames:
 			var data = library[name]
-			if data["value"] <= currentBudget:
+			var cost = data["value"]
+			
+			# Prevent a single enemy from eating all budget when we want multiple spawns,
+			# unless currentBudget is already very low (1-2)
+			if cost <= currentBudget:
+				# If we have 3-4 open slots left, avoid blowing >70% budget on slot 0
+				if i == 0 and scenes.is_empty() and currentBudget > 3 and cost >= currentBudget:
+					continue 
+				
 				var scene = load(data["scene"]) as PackedScene
 				scenes.append(scene)
-				currentBudget -= data["value"]
+				currentBudget -= cost
 				foundEnemy = true
 				break 
 		
-		if not foundEnemy:
+		if not foundEnemy or currentBudget <= 0:
 			break
+			
 	return scenes

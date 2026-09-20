@@ -18,8 +18,13 @@ func _ready():
 	gameManager.prepareBattlefield()
 	spawnPlayers()
 	
-	# NEW: Get dynamic enemies from library
-	var dynamic_enemies = enemyLibrary.get_encounter_scenes(difficulty_value)
+	# Grab budget set by MapNode (fallback to difficulty_value if 0 or unassigned)
+	var active_budget = gameManager.current_battle_budget
+	if active_budget <= 0:
+		active_budget = difficulty_value
+		
+	# Pass the dynamic budget to enemyLibrary
+	var dynamic_enemies = enemyLibrary.get_encounter_scenes(active_budget)
 	spawnEnemies(dynamic_enemies)
 
 func spawnPlayers():
