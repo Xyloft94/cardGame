@@ -110,7 +110,13 @@ func Attack():
 
 #
 func takeDamage(damage: int):
-	health -= damage
+	if armor > 0:
+		health = (health - armor) - damage
+		armor = (armor - damage)
+		if armor < 0:
+			armor = 0
+	else:
+		health -= damage
 	hitAnim() 
 	Feedback(self.global_position, damage, "damage")
 	if health <= 0:
@@ -212,6 +218,7 @@ func die():
 		gameManager.enemyTeam.erase(self)
 		animTree.set("parameters/conditions/Death", true)
 		await get_tree().create_timer(deathLength).timeout
+		gameManager.check_battle_victory()
 		queue_free()
 		
 		

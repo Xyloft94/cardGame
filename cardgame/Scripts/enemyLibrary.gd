@@ -65,28 +65,22 @@ var library = {
 
 
 func get_encounter_scenes(budget: int) -> Array[PackedScene]:
-	var scenes : Array[PackedScene] = []
-	var current_budget = budget
+	var scenes: Array[PackedScene] = []
+	var currentBudget = budget
+	var enemyNames = library.keys()
 	
-	# Get all enemy keys and shuffle them for variety
-	var enemy_names = library.keys()
-	enemy_names.shuffle()
-	
-	# We try to fill the team, but stop if we run out of money
-	# or reach the 4-enemy limit (based on your markers)
 	for i in range(4):
-		var found_enemy = false
-		for name in enemy_names:
+		enemyNames.shuffle()
+		var foundEnemy = false
+		for name in enemyNames:
 			var data = library[name]
-			# If we can afford it, add it
-			if data["value"] <= current_budget:
-				var scene = load(data["scene"])
+			if data["value"] <= currentBudget:
+				var scene = load(data["scene"]) as PackedScene
 				scenes.append(scene)
-				current_budget -= data["value"]
-				found_enemy = true
+				currentBudget -= data["value"]
+				foundEnemy = true
 				break 
 		
-		if not found_enemy:
-			break # Nothing left we can afford
-			
+		if not foundEnemy:
+			break
 	return scenes

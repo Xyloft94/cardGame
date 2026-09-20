@@ -15,6 +15,7 @@ extends Node2D
 
 func _ready():
 	gameManager.battleUI = $battleUI
+	gameManager.prepareBattlefield()
 	spawnPlayers()
 	
 	# NEW: Get dynamic enemies from library
@@ -25,6 +26,7 @@ func spawnPlayers():
 	var markers = playerSlots.get_children()
 	for i in range(gameManager.playerTeam.size()):
 		var activePlayer = gameManager.playerTeam[i]
+		activePlayer.handComponent.owner = activePlayer
 		var handComp = activePlayer.handComponent
 		if activePlayer.get_parent():
 			activePlayer.get_parent().remove_child(activePlayer)
@@ -34,14 +36,7 @@ func spawnPlayers():
 		handComp.setupDeck()
 		handComp.drawHand()
 	gameManager.setAP()
-	#var newPlayer = player.instantiate()
-	#var hand_comp = newPlayer.get_node("handComponent")
-	#hand_comp.handContainer = handUI
-	#markers[0].add_child(newPlayer)
-	#gameManager.Player = newPlayer
-	#hand_comp.setupDeck()
-	#hand_comp.drawHand()
-	#gameManager.setAP()
+
 
 func spawnEnemies(scenes_to_spawn: Array[PackedScene]):
 	gameManager.enemyTeam.clear()

@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkhu44d74hjti"]
+
+[ext_resource type="Script" path="res://DungeonMap.gd" id="1_nbgka"]
+[ext_resource type="PackedScene" uid="uid://ng11x81d0bnf" path="res://MapNode.tscn" id="2_gwxga"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jpf7p"]
+
+[node name="DungeonMap" type="Node2D"]
+script = ExtResource("1_nbgka")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.0862745, 0.0784314, 0.14902, 1)
+offset_right = 721.0
+offset_bottom = 540.0
+mouse_filter = 2
+texture = SubResource("CanvasTexture_jpf7p")
+
+[node name="LinesContainer" type="Node2D" parent="."]
+
+[node name="MapNode" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 100.0
+offset_top = 480.0
+offset_right = 187.0
+offset_bottom = 520.0
+difficulty_budget = 4
+
+[node name="MapNode2" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 300.0
+offset_top = 480.0
+offset_right = 387.0
+offset_bottom = 520.0
+difficulty_budget = 4
+
+[node name="MapNode3" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 500.0
+offset_top = 480.0
+offset_right = 587.0
+offset_bottom = 520.0
+difficulty_budget = 4
+
+[node name="MapNode4" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 100.0
+offset_top = 280.0
+offset_right = 187.0
+offset_bottom = 320.0
+floor_index = 1
+difficulty_budget = 10
+
+[node name="MapNode5" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 300.0
+offset_top = 280.0
+offset_right = 387.0
+offset_bottom = 320.0
+floor_index = 1
+difficulty_budget = 10
+
+[node name="MapNode6" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 500.0
+offset_top = 280.0
+offset_right = 587.0
+offset_bottom = 320.0
+floor_index = 1
+difficulty_budget = 10
+
+[node name="MapNode7" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 100.0
+offset_top = 80.0
+offset_right = 187.0
+offset_bottom = 120.0
+floor_index = 2
+difficulty_budget = 20
+
+[node name="MapNode8" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 300.0
+offset_top = 80.0
+offset_right = 387.0
+offset_bottom = 120.0
+floor_index = 2
+difficulty_budget = 20
+
+[node name="MapNode9" parent="." instance=ExtResource("2_gwxga")]
+offset_left = 500.0
+offset_top = 80.0
+offset_right = 587.0
+offset_bottom = 120.0
+floor_index = 2
+difficulty_budget = 20
+
+[node name="PartyToken" type="Node2D" parent="."]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ng11x81d0bnf"]
+
+[ext_resource type="Script" path="res://MapNode.gd" id="1_lug1m"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_je5ox"]
+
+[node name="MapNode" type="TextureButton"]
+anchors_preset = -1
+anchor_right = 0.121
+anchor_bottom = 0.074
+offset_right = -0.120003
+offset_bottom = 0.0400009
+texture_normal = SubResource("ImageTexture_je5ox")
+script = ExtResource("1_lug1m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.977
+anchor_bottom = 1.0
+offset_right = 2.00099
+mouse_filter = 2

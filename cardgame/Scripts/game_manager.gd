@@ -1,7 +1,8 @@
 extends Node2D
 
 @export var discriptionLabel: Label
-
+var current_map_node: MapNode = null
+var current_battle_budget: int = 10
 var chosenCard: Node = null
 var totalAP: int 
 var modAP: int
@@ -19,6 +20,7 @@ var activePlayer: Player
 var isPlayerTurn: bool
 enum TurnOrder {PLAYER, ENEMY}
 var slotWeights: Array[int] = [60, 30, 10]
+var current_node_path: String = ""
 
 func _ready():
 	var warriorScene = load("res://Warrior.tscn")
@@ -74,19 +76,36 @@ func playerTurn():
 	isPlayerTurn = true
 	resetAP()
 	modAP = 0
+
 	for member in playerTeam:
 		if is_instance_valid(member):
 			if member.has_method("start_turn"):
 				await member.start_turn() 
 			if member.handComponent:
-				member.handComponent.reDraw()
+				member.handComponent.reDraw() # Fills hand back up to intelligence
 			await get_tree().process_frame
-	
 
-	battleUI.handUI.arrangeHand()
+	if battleUI and battleUI.handUI:
+		battleUI.handUI.arrangeHand()
 	
 	await get_tree().create_timer(0.5).timeout
 	print("Player Turn Ready")
+	#isPlayerTurn = true
+	#resetAP()
+	#modAP = 0
+	#for member in playerTeam:
+		#if is_instance_valid(member):
+			#if member.has_method("start_turn"):
+				#await member.start_turn() 
+			#if member.handComponent:
+				#member.handComponent.reDraw()
+			#await get_tree().process_frame
+	
+
+	#battleUI.handUI.arrangeHand()
+	
+	#await get_tree().create_timer(0.5).timeout
+	#print("Player Turn Ready")
 
 func enemyTurn():
 	isPlayerTurn = false
@@ -204,3 +223,57 @@ func setActivePlayer(newPlayer: Player):
 	
 	battleUI.handUI.arrangeHand()
 	showplayerDescription(activePlayer)
+func prepareBattlefield() -> void:
+	canChooseCard = true
+	isPlayerTurn = true
+	cardClicked = false
+	chosenCard = null
+	enemyTeam.clear()
+	
+	# Always reset active player to the team lead (Warrior) at battle start
+	if not playerTeam.is_empty():
+		activePlayer = playerTeam[0]
+	
+	for member in playerTeam:
+		if is_instance_valid(member):
+			member.armor = 0
+			member.temp_modDamage = 0
+			member.wasHurt = false
+			
+			# Clear leftover hidden card nodes inside handComponent from last fight
+			if member.handComponent:
+				for child in member.handComponent.get_children():
+					child.queue_free()
+			
+	setAP()
+
+# Call this when an enemy dies
+func check_battle_victory() -> void:
+	var alive_enemies: int = 0
+	for enemy in enemyTeam:
+		if is_instance_valid(enemy) and enemy.health > 0:
+			alive_enemies += 1
+			
+	if alive_enemies == 0:
+		print("All enemies defeated! Victory!")
+		# Brief delay so death animations finish before changing scenes
+		await get_tree().create_timer(1.0).timeout
+		_return_to_map()
+
+func _return_to_map() -> void:
+	enemyTeam.clear()
+	battleUI = null
+	canChooseCard = true
+	
+	# Reparent persistent heroes back to gameManager
+	for member in playerTeam:
+		if is_instance_valid(member):
+			if member.get_parent():
+				member.get_parent().remove_child(member)
+			add_child(member)
+	
+	# Notify the game that the current node was completed
+	if current_node_path != "":
+		EventBus.map_node_completed.emit(current_node_path)
+	
+	get_tree().change_scene_to_file("res://DungeonMap.tscn")

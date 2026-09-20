@@ -27,11 +27,11 @@ func get_group(type: String, main_target: Node = null) -> Array:
 			targets = [main_target]
 			
 			# 1. Try to splash RIGHT first (Index + 1)
-			if idx < team.size() - 1: 
+			if idx % 2 == 0 and idx + 1 < team.size(): 
 				targets.append(team[idx + 1])
 			
 			# 2. If we ARE the last person, splash LEFT instead (Index - 1)
-			elif idx > 0: 
+			elif idx % 2 ==1 and idx -1 >=0:
 				targets.append(team[idx - 1])
 			
 			# 3. EXIT NOW so we never touch "line" or add a 3rd target
@@ -62,6 +62,12 @@ func play(target:Node):
 
 func discard():
 	Sprite.visible = false
+	
+	# Send played card to caster's discard pile
+	if is_instance_valid(caster) and caster.handComponent:
+		if scene_file_path != "":
+			caster.handComponent.discardPile.append(load(scene_file_path))
+
 	await get_tree().create_timer(.8).timeout
 	EventBus.emit_signal("rearrangeHand")
 	queue_free()

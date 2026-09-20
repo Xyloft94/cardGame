@@ -2,7 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 
-@export var health: int 
+@export var health: int
+@export var max_health: int = 30
 var armor: int = 0
 @export var Name: String 
 var temp_modDamage: int = 0
@@ -25,17 +26,18 @@ func takeDamage(damage :int):
 	hurtAnim()
 	if damage > 0:
 		wasHurt = true
-	if armor >= 0:
-		var newDamage = (damage - armor)
-		if newDamage >= armor:
+		
+	# Correct Armor absorption logic
+	if armor > 0:
+		if damage >= armor:
+			damage -= armor
 			armor = 0
-			health -= newDamage
 		else:
-			armor = (armor - damage)
-	else:
-		health -= damage
-	if armor < 0:
-		armor = 0
+			armor -= damage
+			damage = 0
+	health -= damage
+	health = max(0, health) # Prevents negative HP
+	
 	EventBus.emit_signal("takenDamage", Name)
 		
 func temp_modifyDamage(baseDamage):

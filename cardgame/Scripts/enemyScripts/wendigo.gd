@@ -6,7 +6,7 @@ func _ready() -> void:
 		func():
 			await action_dot("Neighbors", "Burn", 4, 3),
 		func():
-			await dealDamage(8, select_target()),
+			await dealDamage(8, select_target())
 			await action_heal("self", 8),
 		func():
 			await buffDamage(4)

@@ -7,7 +7,7 @@ func _ready() -> void:
 		func():
 			await dealDamage(7, select_target()),
 		func():
-			await dealDamage(5, select_target()),
+			await dealDamage(5, select_target())
 			await action_dot("all_players", "Poison", 1, 5),
 		func():
 			buffAnim()

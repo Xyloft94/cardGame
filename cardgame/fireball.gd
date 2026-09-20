@@ -6,6 +6,5 @@ func play(target):
 	var effect = func(t): 
 		damage(6, t)
 	await apply_to_group(targets, effect)
-	
-	# 5. Clean up
+
 	discard()
